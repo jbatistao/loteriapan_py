@@ -116,10 +116,7 @@ premio3 = data[16].text
 premio3_provincia = data[17].text
 # print(premio3_provincia)
 
-
-
-ref = db.reference('/Sorteos')
-ref.push({
+datasorteo = {
     'fecha': str(ano) + '-' + str(hoy2) + '-' + str(dia),
     'sorteo':sorteo,
     'tipo':'Dominical',
@@ -131,5 +128,9 @@ ref.push({
     'segundo': premio2,
     'provincia2': premio2_provincia,
     'tercer': premio3,
-    'provincia3': premio3_provincia 
-    })
+    'provincia3': premio3_provincia,
+    'ahora': str(hoy)
+}
+
+ref = db.reference('/Sorteos')
+ref.push(datasorteo)
