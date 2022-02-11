@@ -1,5 +1,6 @@
 # import datetime
 
+from random import random
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
@@ -7,6 +8,8 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import *
 from calendar import monthrange
+import string
+import random
 
 # def spider():
 # Configuración de Firebase
@@ -21,12 +24,22 @@ firebase_admin.initialize_app(cred,{'databaseURL':'https://loteriapanama-b70b9-d
 # start = 'http://www.lnb.gob.pa/gordito.php'
 
 
+
+
 # Determinar la fecha actual
 hoy = date.today()
 ahora = datetime.now()
-ahora = ahora.strftime('%H:%M:%S %p')
+ahora = ahora.strftime('%H:%M:%S')
 dataframe = ''
 # hoy = datetime.date(int(hoy.year),int(hoy.month),int(hoy.day))
+
+print(ahora)
+if (ahora >= "05:15:00" and ahora <= "17:40:00"):
+    data = {'test': 1, 'type': 'test', 'ahora': str(ahora)}
+    letters = string.ascii_lowercase
+    ref = db.reference('sorteos')
+    ref.child('test'+ ''.join(random.choice(letters) for i in range(10))).set(data)
+
 
 # Determinar si hoy es miércoles o domingo
 dia_sorteo = hoy.isoweekday()
@@ -39,19 +52,21 @@ fechas_sorteo_semanal = []
 
 for d_ord in range(fecha_ini.toordinal(), fecha_end.toordinal()):
     d = date.fromordinal(d_ord)
-    if (d.isoweekday() == 3 or d.isoweekday() == 5):
+    if (d.isoweekday() == 3 or d.isoweekday() == 7):
         fechas_sorteo_semanal.append(d)
         count += 1
 
 validar_fecha_semanal = hoy in fechas_sorteo_semanal
 
-if (validar_fecha_semanal == True and ahora >= "11:45:00 AM" and ahora >= "02:15:00 PM"):
+if (validar_fecha_semanal == True and ahora >= "11:45:00 AM" and ahora <= "5:15:00 PM"):
     if (dia_sorteo == 3):
         dataframe = 'http://www.lnb.gob.pa/miertab.php'
         print("miercoles")
-    if (dia_sorteo == 5):
+    if (dia_sorteo == 7):
         dataframe = 'http://www.lnb.gob.pa/domleft.php'
         print("domingo")
+else:
+    print('No es miércoles ni domingo o no es hora de la tarea')
 
 # Validar si hoy es el último viernes del mes
 month_days = monthrange(int(hoy.year), int(hoy.month))[1] # Calcula el número de días de un mes
@@ -68,7 +83,7 @@ last_friday = fechas_sorteo_month[len(fechas_sorteo_month)-1]
 
 # validar_fecha_gordito = hoy in fechas_sorteo_month
 
-if (hoy == last_friday  and ahora >= "11:15:00 AM" and ahora >= "03:15:00 PM"):
+if (hoy == last_friday  and ahora >= "11:15:00 AM" and ahora <= "05:15:00 PM"):
     if (dia_sorteo == 5):
         dataframe = 'http://www.lnb.gob.pa/gordito.php'
         print("gordito")
@@ -122,13 +137,13 @@ if (url != ''):
         premio3_provincia = data[17].text
 
         if (dia_sorteo == 3):
-            tipo = 'Miércoles'
-        else:
-            tipo = 'Domingo'
+            tipo = 'Miercolito'
+        if (dia_sorteo == 7):
+            tipo = 'Dominical'
 
         datasorteo = {
-        'fecha': hoy,
-        'sorteo':sorteo,
+        'fecha': str(hoy),
+        'sorteo': sorteo,
         'tipo': tipo,
         'primer': premio1,
         'provincia1': premio1_provincia,
@@ -176,51 +191,19 @@ if (url != ''):
         # Provincia donde jugó el Tercer Premio
         # premio3_provincia = data[17].text
 
-        datasorteo = {
-        'fecha': str(hoy),
-        'sorteo':sorteo,
-        'tipo':'Gordito',
-        'primer': premio1,
-        # 'provincia1': '',
-        'letras': letras,
-        'serie': serie,
-        'folio': folio,
-        # 'segundo': '',
-        # 'provincia2': '',
-        # 'tercer': '',
-        # 'provincia3': '',
-        'ahora': str("hoy")
+        datasorteo = { 
+                'sorteo_num': sorteo,
+                'tipo':'Gordito',
+                'primer': premio1,
+                'letras': letras,
+                'serie': serie,
+                'folio': folio
         }
-
-ref = db.reference('/Sorteos')
-# print(ref.get())
-snapshot = ref.order_by_key().get()
-print(snapshot)
-
-sorteos = []
-for snap, val in snapshot.items():
-    # print(f'\n{val}')
-    sorteos.append(val.get("sorteo"))
-
-sorteo_existe = sorteo in sorteos
-print('Sorteo Existe:',sorteo_existe)
 
 
 # Guardar info
-if (datasorteo != '' and sorteo_existe != False):
-    ref = db.reference('/Sorteos')
-    ref.push(datasorteo)
+if (datasorteo != ''):
+    ref = db.reference('sorteos')
+    ref.child(sorteo).set(datasorteo)
     print('Datos guardados en Firebase')
-
-
-
-
-    # # hoy = datetime.now()
-    # current_time = hoy.strftime("%H:%M:%S")
-    # current_date = hoy.strftime("%Y-%m-%d")
-
-    # # Trigger scraper function everyday on 12 AM
-    # if current_time == "02:00:00" and current_date == '2022-02-11': 
-    #     spider()
-
 
