@@ -68,7 +68,7 @@ last_friday = fechas_sorteo_month[len(fechas_sorteo_month)-1]
 
 # validar_fecha_gordito = hoy in fechas_sorteo_month
 
-if (hoy == last_friday  and ahora >= "11:15:00 AM" and ahora >= "02:15:00 PM"):
+if (hoy == last_friday  and ahora >= "11:15:00 AM" and ahora >= "03:15:00 PM"):
     if (dia_sorteo == 5):
         dataframe = 'http://www.lnb.gob.pa/gordito.php'
         print("gordito")
@@ -192,10 +192,25 @@ if (url != ''):
         'ahora': str("hoy")
         }
 
+ref = db.reference('/Sorteos')
+# print(ref.get())
+snapshot = ref.order_by_key().get()
+print(snapshot)
+
+sorteos = []
+for snap, val in snapshot.items():
+    # print(f'\n{val}')
+    sorteos.append(val.get("sorteo"))
+
+sorteo_existe = sorteo in sorteos
+print('Sorteo Existe:',sorteo_existe)
+
+
 # Guardar info
-if (datasorteo != ''):
+if (datasorteo != '' and sorteo_existe != False):
     ref = db.reference('/Sorteos')
     ref.push(datasorteo)
+    print('Datos guardados en Firebase')
 
 
 
