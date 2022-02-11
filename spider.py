@@ -45,7 +45,7 @@ for d_ord in range(fecha_ini.toordinal(), fecha_end.toordinal()):
 
 validar_fecha_semanal = hoy in fechas_sorteo_semanal
 
-if (validar_fecha_semanal == True and ahora >= "01:45:00 PM" and ahora >= "02:15:00 PM"):
+if (validar_fecha_semanal == True and ahora >= "11:45:00 AM" and ahora >= "02:15:00 PM"):
     if (dia_sorteo == 3):
         dataframe = 'http://www.lnb.gob.pa/miertab.php'
         print("miercoles")
