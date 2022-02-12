@@ -34,7 +34,7 @@ dataframe = ''
 # hoy = datetime.date(int(hoy.year),int(hoy.month),int(hoy.day))
 
 print(ahora)
-if (ahora >= "05:15:00" and ahora <= "17:40:00"):
+if (ahora >= "00:15:00" and ahora <= "17:40:00"):
     data = {'test': 1, 'type': 'test', 'ahora': str(ahora)}
     letters = string.ascii_lowercase
     ref = db.reference('sorteos')
