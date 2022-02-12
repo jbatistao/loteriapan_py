@@ -1,1 +1,0 @@
-worker: python spider.py
