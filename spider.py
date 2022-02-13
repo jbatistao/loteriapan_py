@@ -38,6 +38,8 @@ if (ahora >= "00:15:00" and ahora <= "23:40:00"):
     data = {'test': 1, 'type': 'test', 'ahora': str(datetime.now())}
     ref = db.reference('prueba')
     ref.child('funciona - '+''.join(str(hoy)+'-'+ahora)).set(data)
+else:
+    print('La prueba está fuera del rango')
 
 
 # Determinar si hoy es miércoles o domingo
