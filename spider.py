@@ -8,8 +8,8 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import *
 from calendar import monthrange
-import string
-import random
+# import string
+# import random
 
 # def spider():
 # Configuración de Firebase
@@ -34,11 +34,10 @@ dataframe = ''
 # hoy = datetime.date(int(hoy.year),int(hoy.month),int(hoy.day))
 
 print(ahora)
-if (ahora >= "00:15:00" and ahora <= "17:40:00"):
-    data = {'test': 1, 'type': 'test', 'ahora': str(ahora)}
-    letters = string.ascii_lowercase
-    ref = db.reference('sorteos')
-    ref.child('test'+ ''.join(random.choice(letters) for i in range(10))).set(data)
+if (ahora >= "00:15:00" and ahora <= "23:40:00"):
+    data = {'test': 1, 'type': 'test', 'ahora': str(datetime.now())}
+    ref = db.reference('prueba')
+    ref.child('funciona - '+''.join(str(hoy)+'-'+ahora)).set(data)
 
 
 # Determinar si hoy es miércoles o domingo
@@ -58,7 +57,7 @@ for d_ord in range(fecha_ini.toordinal(), fecha_end.toordinal()):
 
 validar_fecha_semanal = hoy in fechas_sorteo_semanal
 
-if (validar_fecha_semanal == True and ahora >= "11:45:00 AM" and ahora <= "5:15:00 PM"):
+if (validar_fecha_semanal == True and ahora >= "13:45:00 PM" and ahora <= "14:15:00 PM"):
     if (dia_sorteo == 3):
         dataframe = 'http://www.lnb.gob.pa/miertab.php'
         print("miercoles")
@@ -83,7 +82,7 @@ last_friday = fechas_sorteo_month[len(fechas_sorteo_month)-1]
 
 # validar_fecha_gordito = hoy in fechas_sorteo_month
 
-if (hoy == last_friday  and ahora >= "11:15:00 AM" and ahora <= "05:15:00 PM"):
+if (hoy == last_friday  and ahora >= "13:45:00 PM" and ahora <= "14:15:00 PM"):
     if (dia_sorteo == 5):
         dataframe = 'http://www.lnb.gob.pa/gordito.php'
         print("gordito")
