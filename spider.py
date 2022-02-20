@@ -19,6 +19,8 @@ hoy = date.today()
 ahora = datetime.now()
 horario = ahora.strftime('%H:%M:%S')
 
+
+
 if (horario >= "13:45:00" and horario <= "14:15:00"):
 
     dataframe = [
@@ -162,3 +164,5 @@ if (horario >= "13:45:00" and horario <= "14:15:00"):
             print('No existe')
             doc_ref = db.collection(u'sorteos').document()
             doc_ref.set(datasorteo)
+else:
+    print('No es hora todavía')
