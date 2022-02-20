@@ -20,9 +20,7 @@ hoy = date.today()
 ahora = datetime.now()
 horario = ahora.strftime('%H:%M:%S')
 
-# if (horario >= "00:00:00" and horario <= "23:59:00"):
-
-anos = ['2021','2020','2019','2018','2017','2016','2015','2014','2013','2012','2011']
+anos = ['2022','2021','2020','2019','2018','2017','2016','2015','2014','2013','2011','2010']
 mes = ['01','02','03','04','05','06','07','08','09','10','11','12']
 
 ia = 0
@@ -36,16 +34,13 @@ for a in anos:
         r = requests.get(url)
         soup = BeautifulSoup(r.content, 'html.parser')
         data = soup.find_all('strong')
-        # print(data[10].text,data[11].text,data[12].text,data[13].text,data[14].text,data[15].text,
-        # data[16].text,data[17].text)
-        
+      
 
-        # # Coloca los valores obtenidos por BS
+        # Coloca los valores obtenidos por BS
         i = 10
         dias = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado']
         meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
 
-        # print(data)
 
         for d in data:
             try:
@@ -77,7 +72,6 @@ for a in anos:
                 
                 datasorteo = {
                     'fecha_sorteo': fecha_sorteo,
-                    'fecha_sorteo_cap': fecha_sorteo_cap,
                     'fecha_sort': fecha_sort,
                     'num_sorteo': '',
                     'tipo_sorteo': tipo_sorteo,
@@ -94,8 +88,14 @@ for a in anos:
                 }
 
                 # Verifica si el número y tipo de sorteo existe 
-                doc_ref = db.collection(u'sorteos').document()
-                doc_ref.set(datasorteo)                                 
+                docs = db.collection(u'sorteos').where(u'fecha_sort', u'==', fecha_sort).get()
+                print('Docs: ',docs)
+
+                # Verifica si el número y tipo de sorteo existe
+                if docs == []:
+                    print('No existe') 
+                    doc_ref = db.collection(u'sorteos').document()
+                    doc_ref.set(datasorteo)                                 
 
                 i = i+8
                 print('i: ',i)

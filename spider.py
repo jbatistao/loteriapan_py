@@ -19,7 +19,7 @@ hoy = date.today()
 ahora = datetime.now()
 horario = ahora.strftime('%H:%M:%S')
 
-
+print('Proceso iniciado')
 
 if (horario >= "13:45:00" and horario <= "14:15:00"):
 
@@ -38,6 +38,7 @@ if (horario >= "13:45:00" and horario <= "14:15:00"):
 
     # Colocar variables en 0
         fecha_sorteo = ''
+        fecha_sorteo_cap = ''
         num_sorteo = ''
         tipo_sorteo = ''
         primer_premio = ''
@@ -55,24 +56,46 @@ if (horario >= "13:45:00" and horario <= "14:15:00"):
         # Fecha del sorteo
         fecha_sorteo = data[0].text
         fecha_sorteo = fecha_sorteo.strip()
-        # print('Fecha Sorteo: ',fecha_sorteo)
+        print('Fecha Sorteo: ',fecha_sorteo)
 
         # Fecha del sorteo
         # fecha_sorteo = data[0].text
         fecha_sorteo_len = len(fecha_sorteo)
         fecha_sorteo_dia = fecha_sorteo[0:2]
+        print(fecha_sorteo_dia)
         fecha_sorteo_ano = fecha_sorteo[len(fecha_sorteo)-4:]
         fecha_sorteo_mes = fecha_sorteo[6:len(fecha_sorteo)-8]
         
         if fecha_sorteo_mes == 'Enero':
-            fecha_sorteo_mesnum = 0
-        if fecha_sorteo_mes == 'Febrero':
             fecha_sorteo_mesnum = 1
+        if fecha_sorteo_mes == 'Febrero':
+            fecha_sorteo_mesnum = 2
+        if fecha_sorteo_mes == 'Marzo':
+            fecha_sorteo_mesnum = 3
+        if fecha_sorteo_mes == 'Abril':
+            fecha_sorteo_mesnum = 4
+        if fecha_sorteo_mes == 'Mayo':
+            fecha_sorteo_mesnum = 5
+        if fecha_sorteo_mes == 'Junio':
+            fecha_sorteo_mesnum = 6
+        if fecha_sorteo_mes == 'Julio':
+            fecha_sorteo_mesnum = 7
+        if fecha_sorteo_mes == 'Agosto':
+            fecha_sorteo_mesnum = 8
+        if fecha_sorteo_mes == 'Septiembre':
+            fecha_sorteo_mesnum = 9
+        if fecha_sorteo_mes == 'Octubre':
+            fecha_sorteo_mesnum = 10
+        if fecha_sorteo_mes == 'Noviembre':
+            fecha_sorteo_mesnum = 11
+        if fecha_sorteo_mes == 'Diciembre':
+            fecha_sorteo_mesnum = 12
 
-
+        print(fecha_sorteo)
     
-        fecha_sorteo_capturada = datetime(int(fecha_sorteo_ano),int(fecha_sorteo_mesnum),int(fecha_sorteo_dia))
-        # print('Fecha Sorteo: ',fecha_sorteo)
+        fecha_sorteo_cap = datetime(int(fecha_sorteo_ano),int(fecha_sorteo_mesnum),int(fecha_sorteo_dia))
+        fecha_sort = fecha_sorteo_cap.strftime("%Y%m%d")
+        # print('Fecha Sorteo: ',fecha_sort)
 
         # No de sorteo
         num_sorteo = data[2].text.replace(":","")
@@ -139,8 +162,7 @@ if (horario >= "13:45:00" and horario <= "14:15:00"):
 
         datasorteo = {
             'fecha_sorteo': fecha_sorteo,
-            'fecha_sorteo_cap': fecha_sorteo_capturada,
-            'fecha_sort': fecha_sorteo_capturada.strftime("%Y%m%d"),
+            'fecha_sort': fecha_sort,
             'num_sorteo': num_sorteo,
             'tipo_sorteo': tipo_sorteo,
             'primer_premio': primer_premio,
@@ -156,7 +178,7 @@ if (horario >= "13:45:00" and horario <= "14:15:00"):
         }
 
         # Verifica si el número y tipo de sorteo existe 
-        docs = db.collection(u'sorteos').where(u'num_sorteo', u'==', num_sorteo).where(u'tipo_sorteo', u'==', tipo_sorteo).get()
+        docs = db.collection(u'sorteos').where(u'fecha_sort', u'==', fecha_sort).get()
         print('Docs: ',docs)
 
         # Graba el documento si no existe en la BD
