@@ -16,15 +16,15 @@ import base64
 dotenvvals = load_dotenv()
 
 
-firebase_private_key_b64 = base64.b64encode(os.getenv('PRIVATE_KEY'))
-firebase_private_key = firebase_private_key_b64.decode(firebase_private_key_b64)
+# firebase_private_key_b64 = base64.b64encode(os.getenv('PRIVATE_KEY'))
+# firebase_private_key = firebase_private_key_b64.decode(firebase_private_key_b64)
 
 
 dataCredentials = {
   "type": os.getenv('TYPE'),
   "project_id": os.getenv('PROJECT_ID'),
   "private_key_id": os.getenv('PRIVATE_KEY_ID'),
-  "private_key": firebase_private_key.replace('/\\n/g', '\n'),
+  "private_key": os.getenv('PRIVATE_KEY').replace('/\\n/g', '\n'),
   "client_email": os.getenv('CLIENT_EMAIL'),
   "client_id": os.getenv('CLIENT_ID'),
   "auth_uri": os.getenv('AUTH_URI'),
