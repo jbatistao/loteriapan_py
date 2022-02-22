@@ -10,6 +10,7 @@ from datetime import *
 import os
 # import dotenv
 from dotenv import load_dotenv
+import json
 
 
 dotenvvals = load_dotenv()
@@ -18,7 +19,7 @@ dataCredentials = {
   "type": os.getenv('TYPE'),
   "project_id": os.getenv('PROJECT_ID'),
   "private_key_id": os.getenv('PRIVATE_KEY_ID'),
-  "private_key": os.getenv('PRIVATE_KEY'),
+  "private_key": os.getenv('PRIVATE_KEY').replace('/\\n/g', '\n'),
   "client_email": os.getenv('CLIENT_EMAIL'),
   "client_id": os.getenv('CLIENT_ID'),
   "auth_uri": os.getenv('AUTH_URI'),
@@ -26,6 +27,8 @@ dataCredentials = {
   "auth_provider_x509_cert_url": os.getenv('AUTH_PROVIDER_X509_CERT_URL'),
   "client_x509_cert_url": os.getenv('CLIENT_X509_CERT_URL'),
 }
+
+# jsoncred = json.dumps(dataCredentials)
 
 # Configuración de Firebase
 cred = credentials.Certificate(dataCredentials)
