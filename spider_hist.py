@@ -20,8 +20,12 @@ hoy = date.today()
 ahora = datetime.now()
 horario = ahora.strftime('%H:%M:%S')
 
-anos = ['2022','2021','2020','2019','2018','2017','2016','2015','2014','2013','2011','2010']
-mes = ['01','02','03','04','05','06','07','08','09','10','11','12']
+# anos = ['2022','2021','2020','2019','2018','2017','2016','2015','2014','2013','2011','2010']
+# mes = ['01','02','03','04','05','06','07','08','09','10','11','12']
+
+anos = ['2021']
+mes = ['12']
+
 
 ia = 0
 im = 0
@@ -75,6 +79,7 @@ for a in anos:
                     'fecha_sort': fecha_sort,
                     'num_sorteo': '',
                     'tipo_sorteo': tipo_sorteo,
+                    'primer_premio': 1234,
                     'primer_premio': primer_premio,
                     'primer_premio_prov': '',
                     'letras': letras,
@@ -101,7 +106,7 @@ for a in anos:
                 print('i: ',i)
             except IndexError:
                 pass
-        
+        #  match /{document=**} {
         im = im+1
         print('im: ',im)
     

@@ -7,9 +7,31 @@ from firebase_admin import firestore
 import requests
 from bs4 import BeautifulSoup
 from datetime import *
+import os
+# import dotenv
+from dotenv import load_dotenv
+
+
+dotenvvals = load_dotenv()
+# print(os.getenv('PRIVATE_KEY'))
+dataCredentials = {
+  "type": os.getenv('TYPE'),
+  "project_id": os.getenv('PROJECT_ID'),
+  "private_key_id": os.getenv('PRIVATE_KEY_ID'),
+  "private_key": os.getenv('PRIVATE_KEY'),
+  "client_email": os.getenv('CLIENT_EMAIL'),
+  "client_id": os.getenv('CLIENT_ID'),
+  "auth_uri": os.getenv('AUTH_URI'),
+  "token_uri": os.getenv('TOKEN_URI'),
+  "auth_provider_x509_cert_url": os.getenv('AUTH_PROVIDER_X509_CERT_URL'),
+  "client_x509_cert_url": os.getenv('CLIENT_X509_CERT_URL'),
+}
 
 # Configuración de Firebase
-cred = credentials.Certificate("serviceAccountKey.json")
+cred = credentials.Certificate(dataCredentials)
+
+print(cred)
+
 firebase_admin.initialize_app(cred)
 
 db = firestore.client()
@@ -21,7 +43,7 @@ horario = ahora.strftime('%H:%M:%S')
 
 print('Proceso iniciado')
 
-if (horario >= "13:45:00" and horario <= "14:15:00"):
+if (horario >= "00:45:00" and horario <= "14:15:00"):
 
     dataframe = [
         'http://www.lnb.gob.pa/domleft.php',
