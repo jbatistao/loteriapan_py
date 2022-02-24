@@ -16,9 +16,6 @@ import base64
 dotenvvals = load_dotenv()
 
 
-# firebase_private_key_b64 = base64.b64encode(os.getenv('PRIVATE_KEY'))
-# firebase_private_key = firebase_private_key_b64.decode(firebase_private_key_b64)
-
 
 dataCredentials = {
   "type": os.getenv('TYPE'),
@@ -51,7 +48,8 @@ horario = ahora.strftime('%H:%M:%S')
 
 print('Proceso iniciado')
 
-if (horario >= "00:45:00" and horario <= "14:15:00"):
+# if (horario >= "00:45:00" and horario <= "23:15:00"):
+if (horario >= "13:45:00" and horario <= "14:30:00"):
 
     dataframe = [
         'http://www.lnb.gob.pa/domleft.php',
@@ -207,14 +205,17 @@ if (horario >= "00:45:00" and horario <= "14:15:00"):
             'creado': ahora
         }
 
-        # Verifica si el número y tipo de sorteo existe 
-        docs = db.collection(u'sorteos').where(u'fecha_sort', u'==', fecha_sort).get()
-        print('Docs: ',docs)
+        # print(len(tercer_premio))
 
-        # Graba el documento si no existe en la BD
-        if docs == []:
-            print('No existe')
-            doc_ref = db.collection(u'sorteos').document()
-            doc_ref.set(datasorteo)
+        if (tipo_sorteo != 'Gordito del Zodiaco' and len(tercer_premio) == 4) or (tipo_sorteo == 'Gordito del Zodiaco' and len(tercer_premio) == 2): 
+            # Verifica si el número y tipo de sorteo existe 
+            docs = db.collection(u'sorteos').where(u'fecha_sort', u'==', fecha_sort).get()
+            print('Docs: ',docs)
+
+            # Graba el documento si no existe en la BD
+            if docs == []:
+                print('No existe')
+                doc_ref = db.collection(u'sorteos').document()
+                doc_ref.set(datasorteo)
 else:
     print('No es hora todavía')
