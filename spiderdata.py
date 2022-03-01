@@ -167,7 +167,8 @@ if (horario >= "00:00:01" and horario <= "23:59:00"):
 
                             img.save("./saved-images/post.png")
                             # Convertir PNG a JPG
-                            img_rgb = img.convert('RGB') 
+                            img2 = Image.open("./saved-images/post.png")
+                            img_rgb = img2.convert('RGB') 
                             img_rgb.save("./saved-images/post.jpg")
 
                             time.sleep(2)

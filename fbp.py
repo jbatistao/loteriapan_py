@@ -31,7 +31,7 @@ def main():
 
     # Publicar en una página de FB con una foto
     # Resultado: {'id': '103119062324271', 'post_id': '102607489042095_103119062324271'}
-    # fb_rx = graph.put_object('102607489042095','photos',url='https://cdn.icon-icons.com/icons2/1948/PNG/512/free-30-instagram-stories-icons26_122574.png',caption='es una prueba con foto y 😀')
+    fb_rx = graph.put_object('102607489042095','photos',url='https://cdn.icon-icons.com/icons2/1948/PNG/512/free-30-instagram-stories-icons26_122574.png',caption='es una prueba con foto y 😀')
     # print(fb_rx)
     
 
@@ -39,10 +39,10 @@ def main():
     # Publicar en una página de IG - Con texto y Emoji
     # Resultado: {'id': '102607489042095_103103765659134'}
     # fb_rx_a = graph.put_object('17841452380183145','media',image_url='https://cdn.icon-icons.com/icons2/1948/PNG/512/free-30-instagram-stories-icons26_122574.png',caption='es una prueba con foto y 😀')
-    fb_rx_a = graph.put_object('17841452380183145','media',image_url='https://loteriapan.herokuapp.com/saved-images/post.jpg',caption='es una prueba con foto y 😀')
+    # fb_rx_a = graph.put_object('17841452380183145','media',image_url='https://loteriapan.herokuapp.com/saved-images/post.jpg',caption='es una prueba con foto y 😀')
     # print(fb_rx_a)
 
-    fb_rx_b = graph.put_object('17841452380183145','media_publish',creation_id=fb_rx_a['id'],caption='es una prueba con foto y 😀')
+    # fb_rx_b = graph.put_object('17841452380183145','media_publish',creation_id=fb_rx_a['id'],caption='es una prueba con foto y 😀')
     # print(fb_rx_b)
  
 if __name__ == '__main__':
