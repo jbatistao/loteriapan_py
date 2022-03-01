@@ -6,7 +6,7 @@ import facebook
 # profilePage_IG = "52345162006"
  
 def main():
-    token = "EAAOUA1lyRtUBALejFcE0xfHFPfuYhXPCllkGTt6y8OgbtLXv7UtqZCyNQ9e6DiGyYBYTBvBPrjXlU5FltZC2PNFqS4TeLeWKOVV27ZCHZAb3SDmZA3wS3GEFLCZBxBIaaKceLT8oCfuhkarz0xffGu2IpuRLPbMCFhR05DaiQ5rprsFmx8A4slkfbzQ4krBocmheN3ZASor7wZDZD"
+    token = "EAAOUA1lyRtUBAFu3mZCC4TYrSVhRBFn1sq6M0PoWFJmjZCan9oOaqjOn4osxwxv8UEBCo6iLktmpbPlBdKNrIm0sF2gLLlZBtDmALWTt8qsvXTlYM5r1jC5oZCzt6xVTlq96DVYkhtAZBmhW4amVCdn0vzo8gLoII0XvNUhq79gZDZD"
     graph = facebook.GraphAPI(token)
 
     
