@@ -165,7 +165,7 @@ if (horario >= "00:00:01" and horario <= "23:59:00"):
                             draw.text((150+x, 790+y), "Tercer Premio",fill=color_a,font=font_h2)
                             draw.text((700+x, 770+y), tercer_premio,fill=color_a,font=font_h1)
 
-                            img.save("./saved-images/post.png")
+                            img.save("./saved-images/post_rs.png")
 
                             time.sleep(2)
 
