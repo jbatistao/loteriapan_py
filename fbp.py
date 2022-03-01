@@ -6,7 +6,7 @@ import facebook
 # profilePage_IG = "52345162006"
  
 def main():
-    token = "EAAOUA1lyRtUBAP4dV1X80K73GemP4fDPegu8rzQngkNlNgbTQumWqUtLE1VX7IO5NX5fdNqZAQAWzLEp4JH4ZC0U7JcODHhGRZCfzMVkC0JFD9sfzRTVnIzYN0WQFjSmukfwcf5xX3eqrEFq5XCT5k53pEMupilrZBZBRHQPE4QZDZD"
+    token = "EAAOUA1lyRtUBAKIfhDVQwqJCxHawcOjyj2ISQ4vZCNRoltItigc3lTgBvZBDZCG28u2Hs6Xbnmw5GcgamZAbE2b1Kzz42rdA46ZCcbZAjpP5FG739wATxgX0DUffePU4GT1NEbgbQZA4aSGF2SIllbPfK4XGZAbad2zWws0L0cRVPQZDZD"
     graph = facebook.GraphAPI(token)
 
     
@@ -24,15 +24,17 @@ def main():
     # Resultado: {'id': '103119062324271', 'post_id': '102607489042095_103119062324271'}
     # fb_rx = graph.put_object('102607489042095','photos',url='https://cdn.icon-icons.com/icons2/1948/PNG/512/free-30-instagram-stories-icons26_122574.png',caption='es una prueba con foto y 😀')
     # print(fb_rx)
+    
 
 
     # Publicar en una página de IG - Con texto y Emoji
     # Resultado: {'id': '102607489042095_103103765659134'}
-    fb_rx_a = graph.put_object('17841452380183145','media',image_url='https://cdn.icon-icons.com/icons2/1948/PNG/512/free-30-instagram-stories-icons26_122574.png',caption='es una prueba con foto y 😀')
-    print(fb_rx_a)
+    # fb_rx_a = graph.put_object('17841452380183145','media',image_url='https://cdn.icon-icons.com/icons2/1948/PNG/512/free-30-instagram-stories-icons26_122574.png',caption='es una prueba con foto y 😀')
+    fb_rx_a = graph.put_object('17841452380183145','media',image_url='/saved-images/post.png',caption='es una prueba con foto y 😀')
+    # print(fb_rx_a)
 
-    fb_rx_b = graph.put_object('17841452380183145','media_publish',creation_id=fb_rx_a['id'],caption='es una prueba con foto y 😀')
-    print(fb_rx_b)
+    # fb_rx_b = graph.put_object('17841452380183145','media_publish',creation_id=fb_rx_a['id'],caption='es una prueba con foto y 😀')
+    # print(fb_rx_b)
  
 if __name__ == '__main__':
     main()
