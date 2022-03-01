@@ -9,6 +9,9 @@ from bs4 import BeautifulSoup
 from datetime import *
 import os
 from PIL import Image,ImageDraw,ImageFont
+import time
+
+import facebook
 
 from dotenv import load_dotenv
 
@@ -26,6 +29,10 @@ dataCredentials = {
   "auth_provider_x509_cert_url": os.getenv('AUTH_PROVIDER_X509_CERT_URL'),
   "client_x509_cert_url": os.getenv('CLIENT_X509_CERT_URL'),
 }
+
+fb_token = os.getenv('FB_TOKEN')
+token = fb_token
+graph = facebook.GraphAPI(token)
 
 # Configuración de Firebase
 cred = credentials.Certificate(dataCredentials)
@@ -122,39 +129,56 @@ if (horario >= "00:00:01" and horario <= "23:59:00"):
                         if docs == []:
                             print('No existe') 
                             doc_ref = db.collection(u'sorteos').document()
-                            doc_ref.set(datasorteo)                                 
+                            doc_ref.set(datasorteo)
+                            print('Registro creado en Firebase')                                 
 
-                            img = Image.open("./source-images/bg.png")
+                            img = Image.open("./source-images/temp_ig.png")
 
-                            font_h1 = ImageFont.truetype('./fonts/Roboto-Medium.ttf',70)
-                            font_h2 = ImageFont.truetype('./fonts/Roboto-Medium.ttf',40)
+                            font_base = './fonts/Roboto-Medium.ttf'
 
-                            color_a = (0,0,0)
-                            x = 20
-                            y = 100
+                            font_h1 = ImageFont.truetype(font_base,70)
+                            font_h2 = ImageFont.truetype(font_base,40)
+                            font_h3 = ImageFont.truetype(font_base,50)
+
+                            color_a = (255,255,255)
+                            x = 0
+                            y = 45
                             draw = ImageDraw.Draw(img)
-                            draw.text((440+x, 65+y), "SORTEO",fill=color_a,font=font_h2)
-                            draw.text((360+x, 110+y), tipo_sorteo,fill=color_a,font=font_h1)
-                            draw.text((320+x, 180+y), fecha_sorteo,fill=color_a,font=font_h2)
+                            draw.text((460+x, 0+y), "Sorteo",fill=color_a,font=font_h3)
+                            draw.text((380+x, 60+y), tipo_sorteo,fill=color_a,font=font_h1)
+                            draw.text((250+x, 150+y), fecha_sorteo,fill=color_a,font=font_h2)
 
-                            draw.text((400+x, 280+y), "Primer Premio",fill=color_a,font=font_h2)
-                            draw.text((450+x, 320+y), primer_premio,fill=color_a,font=font_h1)
+                            draw.text((150+x, 280+y), "Primer Premio",fill=color_a,font=font_h2)
+                            draw.text((700+x, 265+y), primer_premio,fill=color_a,font=font_h1)
 
-                            draw.text((200+x, 420+y), "Letras",fill=color_a,font=font_h2)
-                            draw.text((480+x, 420+y), "Serie",fill=color_a,font=font_h2)
-                            draw.text((770+x, 420+y), "Folio",fill=color_a,font=font_h2)
+                            draw.text((200+x, 400+y), "Letras",fill=color_a,font=font_h2)
+                            draw.text((490+x, 400+y), "Serie",fill=color_a,font=font_h2)
+                            draw.text((770+x, 400+y), "Folio",fill=color_a,font=font_h2)
 
-                            draw.text((170+x, 460+y), letras,fill=color_a,font=font_h1)
-                            draw.text((490+x, 460+y), str(serie),fill=color_a,font=font_h1)
-                            draw.text((790+x, 460+y), str(folio),fill=color_a,font=font_h1)
+                            draw.text((170+x, 450+y), letras,fill=color_a,font=font_h1)
+                            draw.text((500+x, 450+y), str(serie),fill=color_a,font=font_h1)
+                            draw.text((790+x, 450+y), str(folio),fill=color_a,font=font_h1)
 
-                            draw.text((390+x, 560+y), "Segundo Premio",fill=color_a,font=font_h2)
-                            draw.text((450+x, 600+y), segundo_premio,fill=color_a,font=font_h1)
+                            draw.text((150+x, 620+y), "Segundo Premio",fill=color_a,font=font_h2)
+                            draw.text((700+x, 600+y), segundo_premio,fill=color_a,font=font_h1)
 
-                            draw.text((420+x, 700+y), "Tercer Premio",fill=color_a,font=font_h2)
-                            draw.text((450+x, 740+y), tercer_premio,fill=color_a,font=font_h1)
+                            draw.text((150+x, 790+y), "Tercer Premio",fill=color_a,font=font_h2)
+                            draw.text((700+x, 770+y), tercer_premio,fill=color_a,font=font_h1)
 
                             img.save("./saved-images/post.png")
+
+                            time.sleep(2)
+
+                            fb_rx = graph.put_object('102607489042095','photos',url='https://loteriapan.herokuapp.com/saved-images/post.png',caption='Los ganadores 😀')
+                            print(fb_rx)
+
+                            fb_rx_a = graph.put_object('17841452380183145','media',image_url='https://loteriapan.herokuapp.com/saved-images/post.png',caption='es una prueba con foto y 😀')
+                            print(fb_rx_a)
+
+                            fb_rx_b = graph.put_object('17841452380183145','media_publish',creation_id=fb_rx_a['id'],caption='es una prueba con foto y 😀')
+                            print(fb_rx_b)
+
+                            print('Publicada!')
                         
                         i = i+8
                         print('i: ',i)

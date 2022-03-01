@@ -12,33 +12,38 @@ from PIL import Image,ImageDraw,ImageFont
 #         im = add_text(im,"Hello Wolrd", (100,100), 60, (0,0,0))
 #         im.save("./saved-images/demotext.png")
 
-img = Image.open("bg.png")
+img = Image.open("./source-images/temp_ig.png")
 
-font_h1 = ImageFont.truetype('./fonts/Roboto-Medium.ttf',70)
-font_h2 = ImageFont.truetype('./fonts/Roboto-Medium.ttf',40)
+font_base = './fonts/Roboto-Medium.ttf'
 
-color_a = (0,0,0)
-i = 70
+font_h1 = ImageFont.truetype(font_base,70)
+font_h2 = ImageFont.truetype(font_base,40)
+font_h3 = ImageFont.truetype(font_base,50)
+
+color_a = (255,255,255)
+x = 0
+y = 45
 draw = ImageDraw.Draw(img)
-draw.text((265, 110+i), "Sorteo Dominical",fill=color_a,font=font_h1)
-draw.text((250, 180+i), "Domingo 23 de Febrero de 2022",fill=color_a,font=font_h2)
+draw.text((460+x, 0+y), "Sorteo",fill=color_a,font=font_h3)
+draw.text((380+x, 60+y), "Dominical",fill=color_a,font=font_h1)
+draw.text((250+x, 150+y), "Domingo 23 de Febrero de 2022",fill=color_a,font=font_h2)
 
-draw.text((400, 280+i), "Primer Premio",fill=color_a,font=font_h2)
-draw.text((450, 320+i), "0000",fill=color_a,font=font_h1)
+draw.text((150+x, 280+y), "Primer Premio",fill=color_a,font=font_h2)
+draw.text((700+x, 265+y), "0000",fill=color_a,font=font_h1)
 
-draw.text((200, 420+i), "Letras",fill=color_a,font=font_h2)
-draw.text((480, 420+i), "Serie",fill=color_a,font=font_h2)
-draw.text((770, 420+i), "Folio",fill=color_a,font=font_h2)
+draw.text((200+x, 400+y), "Letras",fill=color_a,font=font_h2)
+draw.text((490+x, 400+y), "Serie",fill=color_a,font=font_h2)
+draw.text((770+x, 400+y), "Folio",fill=color_a,font=font_h2)
 
-draw.text((170, 460+i), "AAAA",fill=color_a,font=font_h1)
-draw.text((490, 460+i), "10",fill=color_a,font=font_h1)
-draw.text((790, 460+i), "1",fill=color_a,font=font_h1)
+draw.text((170+x, 450+y), "AAAA",fill=color_a,font=font_h1)
+draw.text((500+x, 450+y), "10",fill=color_a,font=font_h1)
+draw.text((790+x, 450+y), "1",fill=color_a,font=font_h1)
 
-draw.text((390, 560+i), "Segundo Premio",fill=color_a,font=font_h2)
-draw.text((450, 600+i), "0000",fill=color_a,font=font_h1)
+draw.text((150+x, 620+y), "Segundo Premio",fill=color_a,font=font_h2)
+draw.text((700+x, 600+y), "0000",fill=color_a,font=font_h1)
 
-draw.text((420, 700+i), "Tercer Premio",fill=color_a,font=font_h2)
-draw.text((450, 740+i), "0000",fill=color_a,font=font_h1)
+draw.text((150+x, 790+y), "Tercer Premio",fill=color_a,font=font_h2)
+draw.text((700+x, 770+y), "0000",fill=color_a,font=font_h1)
 
 
 img.save("./saved-images/demotext.png")

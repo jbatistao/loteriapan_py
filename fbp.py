@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 dotenvvals = load_dotenv()
 
-dataCredentials = os.getenv('FB_TOKEN')
+fb_token = os.getenv('FB_TOKEN')
 
 
 
@@ -15,7 +15,8 @@ dataCredentials = os.getenv('FB_TOKEN')
 # profilePage_IG = "52345162006"
  
 def main():
-    token = dataCredentials
+    token = fb_token
+    # token = 'EAAOUA1lyRtUBAK0Ih5Yix1uuaIT9xTqcGkjKZA2kbwq0FCtxiNwSQZBFUmTUrHi1fOKEJurZAZCobZBE7LPZCHG1hks53933XkIObCxDtj9eBYMJYZByOsDhUOh2eS49GMLittgeHZAO0Hoo81UiLeaGXhnyrJMUWozPYshc0wWV0NPjakusKxXJ'
     graph = facebook.GraphAPI(token)
 
     
@@ -26,24 +27,24 @@ def main():
 
     # Publicar en una página de FB con un link
     # Resultado: {'id': '102607489042095_103103765659134'}
-    # fb_rx = graph.put_object('102607489042095','feed',message='Esta es una prueba',link='http://www.facebook.com')
+    # fb_rx = graph.put_object('102607489042095','feed',message='Esta es una prueba 222',link='http://www.facebook.com')
     # print(fb_rx)
 
     # Publicar en una página de FB con una foto
     # Resultado: {'id': '103119062324271', 'post_id': '102607489042095_103119062324271'}
-    # fb_rx = graph.put_object('102607489042095','photos',url='https://cdn.icon-icons.com/icons2/1948/PNG/512/free-30-instagram-stories-icons26_122574.png',caption='es una prueba con foto y 😀')
-    # print(fb_rx)
+    fb_rx = graph.put_object('102607489042095','photos',url='https://cdn.icon-icons.com/icons2/1948/PNG/512/free-30-instagram-stories-icons26_122574.png',caption='es una prueba con foto y 😀')
+    print(fb_rx)
     
 
 
     # Publicar en una página de IG - Con texto y Emoji
     # Resultado: {'id': '102607489042095_103103765659134'}
     # fb_rx_a = graph.put_object('17841452380183145','media',image_url='https://cdn.icon-icons.com/icons2/1948/PNG/512/free-30-instagram-stories-icons26_122574.png',caption='es una prueba con foto y 😀')
-    fb_rx_a = graph.put_object('17841452380183145','media',image_url='https://loteriapan.herokuapp.com/saved-images/post.png',caption='es una prueba con foto y 😀')
-    print(fb_rx_a)
+    # fb_rx_a = graph.put_object('17841452380183145','media',image_url='https://loteriapan.herokuapp.com/saved-images/post.png',caption='es una prueba con foto y 😀')
+    # print(fb_rx_a)
 
-    fb_rx_b = graph.put_object('17841452380183145','media_publish',creation_id=fb_rx_a['id'],caption='es una prueba con foto y 😀')
-    print(fb_rx_b)
+    # fb_rx_b = graph.put_object('17841452380183145','media_publish',creation_id=fb_rx_a['id'],caption='es una prueba con foto y 😀')
+    # print(fb_rx_b)
  
 if __name__ == '__main__':
     main()
