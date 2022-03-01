@@ -169,10 +169,10 @@ if (horario >= "00:00:01" and horario <= "23:59:00"):
 
                             time.sleep(2)
 
-                            fb_rx = graph.put_object('102607489042095','photos',url='https://loteriapan.herokuapp.com/saved-images/post.png',caption='Los ganadores 😀')
+                            fb_rx = graph.put_object('102607489042095','photos',url='https://loteriapan.herokuapp.com/saved-images/post_rs.png',caption='Los ganadores 😀')
                             print(fb_rx)
 
-                            fb_rx_a = graph.put_object('17841452380183145','media',image_url='https://loteriapan.herokuapp.com/saved-images/post.png',caption='es una prueba con foto y 😀')
+                            fb_rx_a = graph.put_object('17841452380183145','media',image_url='https://loteriapan.herokuapp.com/saved-images/post_rs.png',caption='es una prueba con foto y 😀')
                             print(fb_rx_a)
 
                             fb_rx_b = graph.put_object('17841452380183145','media_publish',creation_id=fb_rx_a['id'],caption='es una prueba con foto y 😀')
