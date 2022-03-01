@@ -173,7 +173,7 @@ if (horario >= "00:00:01" and horario <= "23:59:00"):
 
                             time.sleep(2)
 
-                            fb_rx = graph.put_object('102607489042095','photos',url='https://loteriapan.herokuapp.com/saved-images/post.jpg',caption='Los ganadores 😀')
+                            fb_rx = graph.put_object('102607489042095','photos',url='https://loteriapan.herokuapp.com/saved-images/post.png',caption='Los ganadores 😀')
                             print('Publicada en FB!')
 
                             fb_rx_a = graph.put_object('17841452380183145','media',image_url='https://loteriapan.herokuapp.com/saved-images/post.jpg',caption='es una prueba con foto y 😀')
@@ -190,11 +190,12 @@ if (horario >= "00:00:01" and horario <= "23:59:00"):
                         pass
                     else:
                         print ('No exception occurred')
-                else:
-                        print ('No hay más datos')
 
             im = im+1
         
         ia=ia+1
+    
+    print ('No hay más datos')
+
 else:
     print('Estamos fuera de horario')     
