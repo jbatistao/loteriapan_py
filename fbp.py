@@ -16,7 +16,6 @@ fb_token = os.getenv('FB_TOKEN')
  
 def main():
     token = fb_token
-    # token = 'EAAOUA1lyRtUBAK0Ih5Yix1uuaIT9xTqcGkjKZA2kbwq0FCtxiNwSQZBFUmTUrHi1fOKEJurZAZCobZBE7LPZCHG1hks53933XkIObCxDtj9eBYMJYZByOsDhUOh2eS49GMLittgeHZAO0Hoo81UiLeaGXhnyrJMUWozPYshc0wWV0NPjakusKxXJ'
     graph = facebook.GraphAPI(token)
 
     
