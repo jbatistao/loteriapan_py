@@ -179,7 +179,7 @@ if (horario >= "00:00:01" and horario <= "23:59:00"):
                             print(fb_rx_a)
 
                             fb_rx_b = graph.put_object('17841452380183145','media_publish',creation_id=fb_rx_a['id'],caption='es una prueba con foto y 😀')
-                            print(fb_rx_b)
+                            # print(fb_rx_b)
 
                             print('Publicada en IG!')
                         
