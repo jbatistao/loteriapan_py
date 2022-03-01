@@ -166,13 +166,14 @@ if (horario >= "00:00:01" and horario <= "23:59:00"):
                             draw.text((700+x, 770+y), tercer_premio,fill=color_a,font=font_h1)
 
                             img.save("./saved-images/post.png")
-                            img_rgb = img.convert('RGB')
+                            # Convertir PNG a JPG
+                            img_rgb = img.convert('RGB') 
                             img_rgb.save("./saved-images/post.jpg")
 
                             time.sleep(2)
 
                             fb_rx = graph.put_object('102607489042095','photos',url='https://loteriapan.herokuapp.com/saved-images/post.jpg',caption='Los ganadores 😀')
-                            print(fb_rx)
+                            print('Publicada en FB!')
 
                             fb_rx_a = graph.put_object('17841452380183145','media',image_url='https://loteriapan.herokuapp.com/saved-images/post.jpg',caption='es una prueba con foto y 😀')
                             print(fb_rx_a)
@@ -180,7 +181,7 @@ if (horario >= "00:00:01" and horario <= "23:59:00"):
                             fb_rx_b = graph.put_object('17841452380183145','media_publish',creation_id=fb_rx_a['id'],caption='es una prueba con foto y 😀')
                             print(fb_rx_b)
 
-                            print('Publicada!')
+                            print('Publicada en IG!')
                         
                         i = i+8
                         print('i: ',i)
