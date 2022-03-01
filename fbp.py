@@ -1,12 +1,21 @@
 from email import message
 import facebook
+import os
+
+from dotenv import load_dotenv
+
+dotenvvals = load_dotenv()
+
+dataCredentials = os.getenv('FB_TOKEN')
+
+
 
 # InfoLot_FB = "102607489042095"
 # InfoLot_IGBA = "17841452380183145"
 # profilePage_IG = "52345162006"
  
 def main():
-    token = "EAAOUA1lyRtUBAFu3mZCC4TYrSVhRBFn1sq6M0PoWFJmjZCan9oOaqjOn4osxwxv8UEBCo6iLktmpbPlBdKNrIm0sF2gLLlZBtDmALWTt8qsvXTlYM5r1jC5oZCzt6xVTlq96DVYkhtAZBmhW4amVCdn0vzo8gLoII0XvNUhq79gZDZD"
+    token = dataCredentials
     graph = facebook.GraphAPI(token)
 
     
