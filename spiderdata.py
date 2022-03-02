@@ -51,15 +51,15 @@ ahora = datetime.now()
 horario = ahora.strftime('%H:%M:%S')
 
 # Verifica si es hora de correr la consulta
-if (horario >= "00: 00:01" and horario <= "23:59:00"):
-# if (horario >= "13:45:00" and horario <= "14:45:00"):
+# if (horario >= "00: 00:01" and horario <= "23:59:00"):
+if (horario >= "13:45:00" and horario <= "14:45:00"):
 
     ano_hoy = ahora.strftime('%Y')
     mes_hoy = ahora.strftime('%m')
 
     # Periodo que buscará
     anos = [ano_hoy]
-    mes = ['02',mes_hoy]
+    mes = [mes_hoy]
 
     # Recorrido
     ia = 0
@@ -181,8 +181,8 @@ if (horario >= "00: 00:01" and horario <= "23:59:00"):
 
                                 msg_regular = 'En el soteo ' + tipo_sorteo + ' de ' + fecha_sorteo + ' los números ganadores fueron: ' + '\n' + 'Primer Premio: ' + primer_premio + '\n' + 'Letras: ' + letras + '\n' + 'Serie: ' + str(serie) + '\n' + 'Folio: ' + str(folio) + '\n' + 'Segundo Premio: ' + segundo_premio + '\n' + 'Tercer Premio: ' + tercer_premio
 
-                                fb_rx = graph.put_object('102607489042095','photos',url='https://loteriapan.herokuapp.com/saved-images/post.jpg',caption=msg_regular)
-                                print('Publicada en FB!')
+                                # fb_rx = graph.put_object('102607489042095','photos',url='https://loteriapan.herokuapp.com/saved-images/post.jpg',caption=msg_regular)
+                                # print('Publicada en FB!')
 
                                 fb_rx_a = graph.put_object('17841452380183145','media',image_url='https://loteriapan.herokuapp.com/saved-images/post.jpg',caption=msg_regular)
                                 print(fb_rx_a)
