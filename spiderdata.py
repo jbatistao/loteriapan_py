@@ -179,13 +179,15 @@ if (horario >= "00: 00:01" and horario <= "23:59:00"):
 
                                 time.sleep(2)
 
-                                fb_rx = graph.put_object('102607489042095','photos',url='https://loteriapan.herokuapp.com/saved-images/post.jpg',caption='Los ganadores 😀')
+                                msg_regular = 'En el soteo ' + tipo_sorteo + ' de ' + fecha_sorteo + ' los números ganadores fueron: ' + '\n' + 'Primer Premio: ' + primer_premio + '\n' + 'Letras: ' + letras + '\n' + 'Serie: ' + str(serie) + '\n' + 'Folio: ' + str(folio) + '\n' + 'Segundo Premio: ' + segundo_premio + '\n' + 'Tercer Premio: ' + tercer_premio
+
+                                fb_rx = graph.put_object('102607489042095','photos',url='https://loteriapan.herokuapp.com/saved-images/post.jpg',caption=msg_regular)
                                 print('Publicada en FB!')
 
-                                fb_rx_a = graph.put_object('17841452380183145','media',image_url='https://loteriapan.herokuapp.com/saved-images/post.jpg',caption='es una prueba con foto y 😀')
+                                fb_rx_a = graph.put_object('17841452380183145','media',image_url='https://loteriapan.herokuapp.com/saved-images/post.jpg',caption=msg_regular)
                                 print(fb_rx_a)
 
-                                fb_rx_b = graph.put_object('17841452380183145','media_publish',creation_id=fb_rx_a['id'],caption='es una prueba con foto y 😀')
+                                fb_rx_b = graph.put_object('17841452380183145','media_publish',creation_id=fb_rx_a['id'])
                                 # print(fb_rx_b)
 
                                 print('Publicada en IG!')
