@@ -14,12 +14,9 @@ from datetime import *
 import requests
 import os
 import time
-import logging
 
 from dotenv import load_dotenv
 
-logging.basicConfig(filename='spiderdata.log', level=logging.INFO)
-logging.info('Started')
 dotenvvals = load_dotenv()
 
 dataCredentials = {
@@ -46,7 +43,7 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 # Inicio del procesamiento
-print('Proceso iniciado')
+print(datetime.now(),' - Proceso iniciado')
 
 # Determinar la fecha actual
 hoy = date.today()
@@ -54,8 +51,8 @@ ahora = datetime.now()
 horario = ahora.strftime('%H:%M:%S')
 
 # Verifica si es hora de correr la consulta
-if (horario >= "00: 00:01" and horario <= "23:59:00"):
-# if (horario >= "13:45:00" and horario <= "14:45:00"):
+# if (horario >= "00: 00:01" and horario <= "23:59:00"):
+if (horario >= "13:45:00" and horario <= "14:45:00"):
 
     ano_hoy = ahora.strftime('%Y')
     mes_hoy = ahora.strftime('%m')
@@ -68,7 +65,7 @@ if (horario >= "00: 00:01" and horario <= "23:59:00"):
     ia = 0
     im = 0
     for a in anos:
-        print('ia: ',ia)
+        # print('ia: ',ia)
         im = 0
         for m in mes:
             url = 'http://www.lnb.gob.pa/numerosjugados.php?tiposorteo=T&ano='+anos[ia]+'&meses='+mes[im]+'&Consultar=Buscar'
@@ -134,7 +131,7 @@ if (horario >= "00: 00:01" and horario <= "23:59:00"):
 
                             # Verifica si el número y tipo de sorteo existe
                             if docs == []: 
-                                print('No existe... debe guardarse')                             
+                                print(datetime.now(),' - No existe... debe guardarse')                             
 
                                 img = Image.open("./source-images/temp_bot.jpg")
 
@@ -174,14 +171,14 @@ if (horario >= "00: 00:01" and horario <= "23:59:00"):
                                 # img2 = Image.open("./saved-images/post.png")
                                 # img_rgb = img2.convert('RGB') 
                                 img.save("./saved-images/post.jpg")
-                                print("Imagen guardada")
+                                print(datetime.now(),' - Imagen guardada')
 
                                 time.sleep(2)
 
                                 msg_regular = 'En el soteo ' + tipo_sorteo + ' de ' + fecha_sorteo + ' los números ganadores fueron: ' + '\n' + 'Primer Premio: ' + primer_premio + '\n' + 'Letras: ' + letras + '\n' + 'Serie: ' + str(serie) + '\n' + 'Folio: ' + str(folio) + '\n' + 'Segundo Premio: ' + segundo_premio + '\n' + 'Tercer Premio: ' + tercer_premio
 
                                 fb_rx = graph.put_object('102607489042095','photos',url='https://loteriapan.herokuapp.com/saved-images/post.jpg',caption=msg_regular)
-                                print('Publicada en FB!')
+                                print(datetime.now(),' - Publicada en FB!')
 
                                 fb_rx_a = graph.put_object('17841452380183145','media',image_url='https://loteriapan.herokuapp.com/saved-images/post.jpg',caption=msg_regular)
                                 print(fb_rx_a)
@@ -189,27 +186,25 @@ if (horario >= "00: 00:01" and horario <= "23:59:00"):
                                 fb_rx_b = graph.put_object('17841452380183145','media_publish',creation_id=fb_rx_a['id'])
                                 # print(fb_rx_b)
 
-                                print('Publicada en IG!')
+                                print(datetime.now(),' - Publicada en IG!')
 
                                  
                                 doc_ref = db.collection(u'sorteos').document()
                                 doc_ref.set(datasorteo)
-                                print('Registro creado en Firebase')
+                                print(datetime.now(),' - Registro creado en Firebase')
                             
                             i = i+8
-                            print('i: ',i)
+                            # print('i: ',i)
                         except IndexError:
                             pass
                         else:
-                            print ('No exception occurred')
+                            print(datetime.now(),' - No exception occurred')
 
                 im = im+1
         
         ia=ia+1
     
-    print ('No hay más datos')
+    print(datetime.now(),' - No hay más datos')
 
 else:
-    print('Estamos fuera de horario')
-
-logging.info('Finished')     
+    print(datetime.now(),' - Estamos fuera de horario')    
