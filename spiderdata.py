@@ -8,15 +8,18 @@ from bs4 import BeautifulSoup
 
 from PIL import Image,ImageDraw,ImageFont
 
+import facebook
+
 from datetime import *
 import requests
 import os
 import time
-
-import facebook
+import logging
 
 from dotenv import load_dotenv
 
+logging.basicConfig(filename='spiderdata.log', level=logging.INFO)
+logging.info('Started')
 dotenvvals = load_dotenv()
 
 dataCredentials = {
@@ -130,13 +133,8 @@ if (horario >= "00: 00:01" and horario <= "23:59:00"):
                                 docs = db.collection(u'sorteos').where(u'fecha_sort', u'==', fecha_sort).get()
 
                             # Verifica si el número y tipo de sorteo existe
-                            if docs == []:
-                                print('No existe') 
-                                doc_ref = db.collection(u'sorteos').document()
-                                doc_ref.set(datasorteo)
-                                print('Registro creado en Firebase')
-
-                                
+                            if docs == []: 
+                                print('No existe... debe guardarse')                             
 
                                 img = Image.open("./source-images/temp_bot.jpg")
 
@@ -192,6 +190,11 @@ if (horario >= "00: 00:01" and horario <= "23:59:00"):
                                 # print(fb_rx_b)
 
                                 print('Publicada en IG!')
+
+                                 
+                                doc_ref = db.collection(u'sorteos').document()
+                                doc_ref.set(datasorteo)
+                                print('Registro creado en Firebase')
                             
                             i = i+8
                             print('i: ',i)
@@ -207,4 +210,6 @@ if (horario >= "00: 00:01" and horario <= "23:59:00"):
     print ('No hay más datos')
 
 else:
-    print('Estamos fuera de horario')     
+    print('Estamos fuera de horario')
+
+logging.info('Finished')     
