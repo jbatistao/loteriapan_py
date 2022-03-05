@@ -135,7 +135,7 @@ for a in anos:
                         if docs == []: 
                             print(datetime.now(),' - No existe... debe guardarse')                             
 
-                            img = Image.open("./source-images/temp_bot.jpg")
+                            img = Image.open("./source-images/temp_bot.png")
 
                             font_base = './fonts/Roboto-Medium.ttf'
 
@@ -168,10 +168,10 @@ for a in anos:
                             draw.text((150+x, 790+y), "Tercer Premio",fill=color_a,font=font_h2)
                             draw.text((700+x, 770+y), tercer_premio,fill=color_a,font=font_h1)
 
-                            # img.save("./saved-images/post.png")
+                            img.save("./saved-images/post.png")
                             # Convertir PNG a JPG
-                            # img2 = Image.open("./saved-images/post.png")
-                            # img_rgb = img2.convert('RGB')
+                            img2 = Image.open("./saved-images/post.png")
+                            img_rgb = img2.convert('RGB')
                             # random_serie = random.randrange(1000,2000,1)
                             # image_name = str(random_serie)+'.jpg'
                             # image_name = 'post.jpg'
@@ -180,13 +180,13 @@ for a in anos:
                             print(datetime.now(),' - Imagen guardada')
 
                             # image_name = 'post.jpg'
-                            time.sleep(2)
-                            Image.open('./saved-images/post.jpg')
-                            time.sleep(2)
+                            time.sleep(3)
+                            # Image.open('./saved-images/post.jpg')
+                            # time.sleep(2)
 
                             msg_regular = 'En el soteo ' + tipo_sorteo + ' de ' + fecha_sorteo + ' los números ganadores fueron: ' + '\n' + 'Primer Premio: ' + primer_premio + '\n' + 'Letras: ' + letras + '\n' + 'Serie: ' + str(serie) + '\n' + 'Folio: ' + str(folio) + '\n' + 'Segundo Premio: ' + segundo_premio + '\n' + 'Tercer Premio: ' + tercer_premio
 
-                            fb_rx = graph.put_object('102607489042095','photos',url='https://loteriapan.herokuapp.com/saved-images/post.jpg',caption=msg_regular)
+                            fb_rx = graph.put_object('102607489042095','photos',url='https://loteriapan.herokuapp.com/saved-images/post.png',caption=msg_regular)
                             print(datetime.now(),' - Publicada en FB!')
 
                             fb_rx_a = graph.put_object('17841452380183145','media',image_url='https://loteriapan.herokuapp.com/saved-images/post.jpg',caption=msg_regular)
@@ -198,7 +198,8 @@ for a in anos:
                             print(datetime.now(),' - Publicada en IG!')
 
                             os.remove('./saved-images/post.jpg')
-                            print(datetime.now(),' - Se ha borrado la imagen!')
+                            os.remove('./saved-images/post.png')
+                            print(datetime.now(),' - Se han borrado las imagenes!')
                                 
                             doc_ref = db.collection(u'sorteos').document()
                             doc_ref.set(datasorteo)
