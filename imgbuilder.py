@@ -12,7 +12,7 @@ from PIL import Image,ImageDraw,ImageFont
 #         im = add_text(im,"Hello Wolrd", (100,100), 60, (0,0,0))
 #         im.save("./saved-images/demotext.png")
 
-img = Image.open("./source-images/temp_ig.png")
+img = Image.open("./source-images/temp_bot.jpg")
 
 font_base = './fonts/Roboto-Medium.ttf'
 
@@ -55,6 +55,6 @@ draw.text((700+x, 770+y), tercer_premio,fill=color_a,font=font_h1)
 
 img.save("./saved-images/post.png")
 # Convertir PNG a JPG
-img2 = Image.open("./saved-images/post.png")
+# img2 = Image.open("./saved-images/post.png")
 img_rgb = img2.convert('RGB') 
 img_rgb.save("./saved-images/post.jpg")

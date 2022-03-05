@@ -170,17 +170,17 @@ for a in anos:
                             # Convertir PNG a JPG
                             # img2 = Image.open("./saved-images/post.png")
                             # img_rgb = img2.convert('RGB') 
-                            img.save("./saved-images/post.jpg")
+                            img.save("./saved-images/post" + str(hoy) + ".jpg")
                             print(datetime.now(),' - Imagen guardada')
 
-                            time.sleep(2)
+                            time.sleep(3)
 
                             msg_regular = 'En el soteo ' + tipo_sorteo + ' de ' + fecha_sorteo + ' los números ganadores fueron: ' + '\n' + 'Primer Premio: ' + primer_premio + '\n' + 'Letras: ' + letras + '\n' + 'Serie: ' + str(serie) + '\n' + 'Folio: ' + str(folio) + '\n' + 'Segundo Premio: ' + segundo_premio + '\n' + 'Tercer Premio: ' + tercer_premio
 
-                            fb_rx = graph.put_object('102607489042095','photos',url='https://loteriapan.herokuapp.com/saved-images/post.jpg',caption=msg_regular)
+                            fb_rx = graph.put_object('102607489042095','photos',url='https://loteriapan.herokuapp.com/saved-images/post' + str(hoy) + '.jpg',caption=msg_regular)
                             print(datetime.now(),' - Publicada en FB!')
 
-                            fb_rx_a = graph.put_object('17841452380183145','media',image_url='https://loteriapan.herokuapp.com/saved-images/post.jpg',caption=msg_regular)
+                            fb_rx_a = graph.put_object('17841452380183145','media',image_url='https://loteriapan.herokuapp.com/saved-images/post' + str(hoy) + '.jpg',caption=msg_regular)
                             print(fb_rx_a)
 
                             fb_rx_b = graph.put_object('17841452380183145','media_publish',creation_id=fb_rx_a['id'])
@@ -188,6 +188,8 @@ for a in anos:
 
                             print(datetime.now(),' - Publicada en IG!')
 
+                            os.remove("./saved-images/post" + str(hoy) + ".jpg")
+                            print(datetime.now(),' - Se ha borrado la imagen!')
                                 
                             doc_ref = db.collection(u'sorteos').document()
                             doc_ref.set(datasorteo)
