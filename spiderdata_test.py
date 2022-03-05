@@ -189,7 +189,7 @@ for a in anos:
                             fb_rx = graph.put_object('102607489042095','photos',url='https://loteriapan.herokuapp.com/saved-images/post.jpg',caption=msg_regular)
                             print(datetime.now(),' - Publicada en FB!')
 
-                            fb_rx_a = graph.put_object('17841452380183145','media',image_url='https://loteriapan.herokuapp.com/saved-images/post.jpg'+image_name,caption=msg_regular)
+                            fb_rx_a = graph.put_object('17841452380183145','media',image_url='https://loteriapan.herokuapp.com/saved-images/post.jpg',caption=msg_regular)
                             print(fb_rx_a)
 
                             fb_rx_b = graph.put_object('17841452380183145','media_publish',creation_id=fb_rx_a['id'])
