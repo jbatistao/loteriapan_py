@@ -1,6 +1,6 @@
 # Spider 
 
-import random
+
 # from tkinter import image_names
 import firebase_admin
 from firebase_admin import credentials,db
@@ -20,6 +20,9 @@ import time
 from dotenv import load_dotenv
 
 dotenvvals = load_dotenv()
+
+
+
 
 dataCredentials = {
   "type": os.getenv('TYPE'),
@@ -186,10 +189,10 @@ for a in anos:
 
                             msg_regular = 'En el soteo ' + tipo_sorteo + ' de ' + fecha_sorteo + ' los números ganadores fueron: ' + '\n' + 'Primer Premio: ' + primer_premio + '\n' + 'Letras: ' + letras + '\n' + 'Serie: ' + str(serie) + '\n' + 'Folio: ' + str(folio) + '\n' + 'Segundo Premio: ' + segundo_premio + '\n' + 'Tercer Premio: ' + tercer_premio
 
-                            fb_rx = graph.put_object('102607489042095','photos',url='https://loteriapan.herokuapp.com/saved-images/post.jpg',caption=msg_regular)
+                            fb_rx = graph.put_object('102607489042095','photos',url='https://loteriapan.herokuapp.com/saved-images/1111.jpg',caption=msg_regular)
                             print(datetime.now(),' - Publicada en FB!')
 
-                            fb_rx_a = graph.put_object('17841452380183145','media',image_url='https://loteriapan.herokuapp.com/saved-images/post.jpg',caption=msg_regular)
+                            fb_rx_a = graph.put_object('17841452380183145','media',image_url='https://infoloteria.s3.amazonaws.com/post.jpg',caption=msg_regular)
                             print(fb_rx_a)
 
                             fb_rx_b = graph.put_object('17841452380183145','media_publish',creation_id=fb_rx_a['id'])
