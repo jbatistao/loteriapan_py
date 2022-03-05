@@ -1,5 +1,7 @@
 # Spider 
 
+import random
+# from tkinter import image_names
 import firebase_admin
 from firebase_admin import credentials,db
 from firebase_admin import firestore
@@ -169,18 +171,23 @@ for a in anos:
                             # img.save("./saved-images/post.png")
                             # Convertir PNG a JPG
                             # img2 = Image.open("./saved-images/post.png")
-                            # img_rgb = img2.convert('RGB') 
-                            img.save("./saved-images/post" + str(hoy) + ".jpg")
+                            # img_rgb = img2.convert('RGB')
+                            # random_serie = random.randrange(1000,2000,1)
+                            # image_name = str(random_serie)+'.jpg'
+                            image_name = 'post.jpg'
+                            img.save('./saved-images/'+image_name)
+                            print(image_name)
                             print(datetime.now(),' - Imagen guardada')
 
+                            # image_name = 'post.jpg'
                             time.sleep(3)
 
                             msg_regular = 'En el soteo ' + tipo_sorteo + ' de ' + fecha_sorteo + ' los números ganadores fueron: ' + '\n' + 'Primer Premio: ' + primer_premio + '\n' + 'Letras: ' + letras + '\n' + 'Serie: ' + str(serie) + '\n' + 'Folio: ' + str(folio) + '\n' + 'Segundo Premio: ' + segundo_premio + '\n' + 'Tercer Premio: ' + tercer_premio
 
-                            fb_rx = graph.put_object('102607489042095','photos',url='https://loteriapan.herokuapp.com/saved-images/post' + str(hoy) + '.jpg',caption=msg_regular)
+                            fb_rx = graph.put_object('102607489042095','photos',url='https://loteriapan.herokuapp.com/saved-images/'+image_name,caption=msg_regular)
                             print(datetime.now(),' - Publicada en FB!')
 
-                            fb_rx_a = graph.put_object('17841452380183145','media',image_url='https://loteriapan.herokuapp.com/saved-images/post' + str(hoy) + '.jpg',caption=msg_regular)
+                            fb_rx_a = graph.put_object('17841452380183145','media',image_url='https://loteriapan.herokuapp.com/saved-images/'+image_name,caption=msg_regular)
                             print(fb_rx_a)
 
                             fb_rx_b = graph.put_object('17841452380183145','media_publish',creation_id=fb_rx_a['id'])
@@ -188,7 +195,7 @@ for a in anos:
 
                             print(datetime.now(),' - Publicada en IG!')
 
-                            os.remove("./saved-images/post" + str(hoy) + ".jpg")
+                            os.remove('./saved-images/'+image_name)
                             print(datetime.now(),' - Se ha borrado la imagen!')
                                 
                             doc_ref = db.collection(u'sorteos').document()
