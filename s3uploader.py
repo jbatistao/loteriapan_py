@@ -18,10 +18,10 @@ for bucket in s3.buckets.all():
 
 print("Enviando archivo...")
 
-ex = os.path.exists('.\saved-images\post.jpg')
+ex = os.path.exists('saved-images/post.jpg')
 
 if ex == True:
     # s3.Object('infoloteria','temp_bot.jpg').upload_file(r'.\source-images\temp_bot.jpg')
-    s3.Object('infoloteria','post20220302.jpg').upload_file('.\saved-images\post.jpg')
+    s3.Object('infoloteria','post20220302.jpg').upload_file('saved-images/post.jpg')
 
     print("Archivo cargado")
