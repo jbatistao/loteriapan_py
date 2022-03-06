@@ -19,6 +19,6 @@ for bucket in s3.buckets.all():
 print("Enviando archivo...")
 
 # s3.Object('infoloteria','temp_bot.jpg').upload_file(r'.\source-images\temp_bot.jpg')
-s3.Object('infoloteria','post20220302.jpg').upload_file(r'.\source-images\post20220302.jpg')
+s3.Object('infoloteria','post20220302.jpg').upload_file(r'.\saved-images\post.jpg')
 
 print("Archivo cargado")
