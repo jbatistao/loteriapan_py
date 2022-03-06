@@ -60,8 +60,8 @@ ahora = datetime.now()
 horario = ahora.strftime('%H:%M:%S')
 
 # Verifica si es hora de correr la consulta
-if (horario >= "00: 00:01" and horario <= "23:59:00"):
-# if (horario >= "13:45:00" and horario <= "14:45:00"):
+# if (horario >= "00: 00:01" and horario <= "23:59:00"):
+if (horario >= "13:45:00" and horario <= "14:45:00"):
 
     ano_hoy = ahora.strftime('%Y')
     mes_hoy = ahora.strftime('%m')
