@@ -60,8 +60,8 @@ ahora = datetime.now()
 horario = ahora.strftime('%H:%M:%S')
 
 # Verifica si es hora de correr la consulta
-# if (horario >= "00: 00:01" and horario <= "23:59:00"):
-if (horario >= "13:45:00" and horario <= "14:45:00"):
+if (horario >= "00: 00:01" and horario <= "23:59:00"):
+# if (horario >= "13:45:00" and horario <= "14:45:00"):
 
     ano_hoy = ahora.strftime('%Y')
     mes_hoy = ahora.strftime('%m')
@@ -183,10 +183,7 @@ if (horario >= "13:45:00" and horario <= "14:45:00"):
 
                                 time.sleep(3)
                                 
-                                
                                 urls3 = 'https://infoloteria.s3.amazonaws.com/'+img_name
-
-                                # rr = os.path()
 
                                 s3.Object('infoloteria',img_name).upload_file(img_fullroute)
                                 print(datetime.now(),' - Publicada en S3!')
