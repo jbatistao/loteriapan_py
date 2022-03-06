@@ -17,12 +17,18 @@ import requests
 import os
 import time
 
+import boto3
+
 from dotenv import load_dotenv
 
 dotenvvals = load_dotenv()
 
+aws_access_key_id = os.getenv('AWS_ACCESS_KEY_ID')
+aws_secret_access_key = os.getenv('AWS_SECRET_ACCESS_KEY')
+region_name = os.getenv('REGION_NAME')
 
-
+s3 = boto3.resource('s3')
+print("Conectando al bucket...")
 
 dataCredentials = {
   "type": os.getenv('TYPE'),
@@ -171,37 +177,37 @@ for a in anos:
                             draw.text((150+x, 790+y), "Tercer Premio",fill=color_a,font=font_h2)
                             draw.text((700+x, 770+y), tercer_premio,fill=color_a,font=font_h1)
 
-                            img.save("./saved-images/post.jpg")
-                            # Convertir PNG a JPG
-                            # img2 = Image.open("./saved-images/post.png")
-                            # img_rgb = img2.convert('RGB')
-                            # random_serie = random.randrange(1000,2000,1)
-                            # image_name = str(random_serie)+'.jpg'
-                            # image_name = 'post.jpg'
-                            # img.save('./saved-images/post.jpg')
-                            # print(image_name)
+                            img_name = 'post'+fecha_sort+'.jpg'
+                            img_fullroute = '.\source-images\\'+fecha_sort+'.jpg'
+
+                            img.save('./saved-images/'+img_name)
                             print(datetime.now(),' - Imagen guardada')
 
-                            # image_name = 'post.jpg'
                             time.sleep(3)
-                            # Image.open('./saved-images/post.jpg')
-                            # time.sleep(2)
+                            
+                            
+                            urls3 = 'https://infoloteria.s3.amazonaws.com/'+img_name
+
+                            # rr = os.path()
+
+                            s3.Object('infoloteria',img_name).upload_file(img_fullroute)
+                            print(datetime.now(),' - Publicada en S3!')
+                            time.sleep(5)
 
                             msg_regular = 'En el soteo ' + tipo_sorteo + ' de ' + fecha_sorteo + ' los números ganadores fueron: ' + '\n' + 'Primer Premio: ' + primer_premio + '\n' + 'Letras: ' + letras + '\n' + 'Serie: ' + str(serie) + '\n' + 'Folio: ' + str(folio) + '\n' + 'Segundo Premio: ' + segundo_premio + '\n' + 'Tercer Premio: ' + tercer_premio
 
-                            fb_rx = graph.put_object('102607489042095','photos',url='https://infoloteria.s3.amazonaws.com/post.jpg',caption=msg_regular)
+                            fb_rx = graph.put_object('102607489042095','photos',url=urls3,caption=msg_regular)
                             print(datetime.now(),' - Publicada en FB!')
 
-                            fb_rx_a = graph.put_object('17841452380183145','media',image_url='https://infoloteria.s3.amazonaws.com/post.jpg',caption=msg_regular)
-                            print(fb_rx_a)
+                            fb_rx_a = graph.put_object('17841452380183145','media',image_url=urls3,caption=msg_regular)
+                            # print(fb_rx_a)
 
                             fb_rx_b = graph.put_object('17841452380183145','media_publish',creation_id=fb_rx_a['id'])
                             # print(fb_rx_b)
 
                             print(datetime.now(),' - Publicada en IG!')
 
-                            os.remove('./saved-images/post.jpg')
-                            # os.remove('./saved-images/post.png')
+                            os.remove('./saved-images/'+img_name)
                             print(datetime.now(),' - Se han borrado las imagenes!')
                                 
                             doc_ref = db.collection(u'sorteos').document()
