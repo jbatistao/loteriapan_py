@@ -178,7 +178,7 @@ for a in anos:
                             draw.text((700+x, 770+y), tercer_premio,fill=color_a,font=font_h1)
 
                             img_name = 'post'+fecha_sort+'.jpg'
-                            img_fullroute = '.\source-images\\'+fecha_sort+'.jpg'
+                            img_fullroute = '.\saved-images\\'+img_name
 
                             img.save('./saved-images/'+img_name)
                             print(datetime.now(),' - Imagen guardada')

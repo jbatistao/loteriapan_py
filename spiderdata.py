@@ -176,36 +176,34 @@ if (horario >= "13:45:00" and horario <= "14:45:00"):
                                 draw.text((700+x, 770+y), tercer_premio,fill=color_a,font=font_h1)
 
                                 img_name = 'post'+fecha_sort+'.jpg'
-                            img_fullroute = '.\source-images\\'+fecha_sort+'.jpg'
+                                img_fullroute = '.\saved-images\\'+img_name
 
-                            img.save('./saved-images/'+img_name)
-                            print(datetime.now(),' - Imagen guardada')
+                                img.save('./saved-images/'+img_name)
+                                print(datetime.now(),' - Imagen guardada')
 
-                            time.sleep(3)
-                            
-                            urls3 = 'https://infoloteria.s3.amazonaws.com/'+img_name
+                                time.sleep(3)
+                                
+                                urls3 = 'https://infoloteria.s3.amazonaws.com/'+img_name
 
-                            # rr = os.path()
+                                s3.Object('infoloteria',img_name).upload_file(img_fullroute)
+                                print(datetime.now(),' - Publicada en S3!')
+                                time.sleep(5)
 
-                            s3.Object('infoloteria',img_name).upload_file(img_fullroute)
-                            print(datetime.now(),' - Publicada en S3!')
-                            time.sleep(5)
+                                msg_regular = 'En el soteo ' + tipo_sorteo + ' de ' + fecha_sorteo + ' los números ganadores fueron: ' + '\n' + 'Primer Premio: ' + primer_premio + '\n' + 'Letras: ' + letras + '\n' + 'Serie: ' + str(serie) + '\n' + 'Folio: ' + str(folio) + '\n' + 'Segundo Premio: ' + segundo_premio + '\n' + 'Tercer Premio: ' + tercer_premio
 
-                            msg_regular = 'En el soteo ' + tipo_sorteo + ' de ' + fecha_sorteo + ' los números ganadores fueron: ' + '\n' + 'Primer Premio: ' + primer_premio + '\n' + 'Letras: ' + letras + '\n' + 'Serie: ' + str(serie) + '\n' + 'Folio: ' + str(folio) + '\n' + 'Segundo Premio: ' + segundo_premio + '\n' + 'Tercer Premio: ' + tercer_premio
+                                fb_rx = graph.put_object('102607489042095','photos',url=urls3,caption=msg_regular)
+                                print(datetime.now(),' - Publicada en FB!')
 
-                            fb_rx = graph.put_object('102607489042095','photos',url=urls3,caption=msg_regular)
-                            print(datetime.now(),' - Publicada en FB!')
+                                fb_rx_a = graph.put_object('17841452380183145','media',image_url=urls3,caption=msg_regular)
+                                # print(fb_rx_a)
 
-                            fb_rx_a = graph.put_object('17841452380183145','media',image_url=urls3,caption=msg_regular)
-                            # print(fb_rx_a)
+                                fb_rx_b = graph.put_object('17841452380183145','media_publish',creation_id=fb_rx_a['id'])
+                                # print(fb_rx_b)
 
-                            fb_rx_b = graph.put_object('17841452380183145','media_publish',creation_id=fb_rx_a['id'])
-                            # print(fb_rx_b)
+                                print(datetime.now(),' - Publicada en IG!')
 
-                            print(datetime.now(),' - Publicada en IG!')
-
-                            os.remove('./saved-images/'+img_name)
-                            print(datetime.now(),' - Se han borrado las imagenes!')
+                                os.remove('./saved-images/'+img_name)
+                                print(datetime.now(),' - Se han borrado las imagenes!')
 
                                  
                                 doc_ref = db.collection(u'sorteos').document()
