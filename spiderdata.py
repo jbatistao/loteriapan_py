@@ -176,14 +176,17 @@ if (horario >= "13:45:00" and horario <= "14:45:00"):
                                 draw.text((700+x, 770+y), tercer_premio,fill=color_a,font=font_h1)
 
                                 img_name = 'post'+fecha_sort+'.jpg'
-                                img_fullroute = '.\saved-images\\'+img_name
+                                img_fullroute = 'saved-images/'+img_name
 
                                 img.save('./saved-images/'+img_name)
                                 print(datetime.now(),' - Imagen guardada')
 
                                 time.sleep(3)
                                 
+                                
                                 urls3 = 'https://infoloteria.s3.amazonaws.com/'+img_name
+
+                                # rr = os.path()
 
                                 s3.Object('infoloteria',img_name).upload_file(img_fullroute)
                                 print(datetime.now(),' - Publicada en S3!')

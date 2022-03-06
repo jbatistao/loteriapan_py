@@ -178,7 +178,7 @@ for a in anos:
                             draw.text((700+x, 770+y), tercer_premio,fill=color_a,font=font_h1)
 
                             img_name = 'post'+fecha_sort+'.jpg'
-                            img_fullroute = '.\saved-images\\'+img_name
+                            img_fullroute = 'saved-images/'+img_name
 
                             img.save('./saved-images/'+img_name)
                             print(datetime.now(),' - Imagen guardada')
@@ -191,6 +191,7 @@ for a in anos:
                             # rr = os.path()
 
                             s3.Object('infoloteria',img_name).upload_file(img_fullroute)
+                            # s3.Object('infoloteria',img_name).upload_file('saved-images/post.jpg')
                             print(datetime.now(),' - Publicada en S3!')
                             time.sleep(5)
 
