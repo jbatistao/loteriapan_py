@@ -142,7 +142,7 @@ if (horario >= "00: 00:01" and horario <= "23:59:00"):
                             if docs == []: 
                                 print(datetime.now(),' - No existe... debe guardarse')                             
 
-                                img = Image.open("./source-images/temp_bot.jpg")
+                                img = Image.open("./source-images/imgtemp_bot.jpg")
 
                                 font_base = './fonts/Roboto-Medium.ttf'
 
