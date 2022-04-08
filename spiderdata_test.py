@@ -14,6 +14,7 @@ from datetime import *
 import requests
 import os
 import time
+from io import BytesIO
 
 import boto3
 
@@ -60,8 +61,8 @@ ahora = datetime.now()
 horario = ahora.strftime('%H:%M:%S')
 
 # Verifica si es hora de correr la consulta
-if (horario >= "00: 00:01" and horario <= "23:59:00"):
-# if (horario >= "13:45:00" and horario <= "14:45:00"):
+# if (horario >= "00: 00:01" and horario <= "23:59:00"):
+if (horario >= "00:00:01" and horario <= "23:55:55"):
 
     ano_hoy = ahora.strftime('%Y')
     mes_hoy = ahora.strftime('%m')
@@ -143,6 +144,12 @@ if (horario >= "00: 00:01" and horario <= "23:59:00"):
                                 print(datetime.now(),' - No existe... debe guardarse')                             
 
                                 img = Image.open("./source-images/imgtemp_bot.jpg")
+
+                                urls3img = 'https://infoloteria.s3.amazonaws.com/imgtemp_bot.jpg'                             
+
+                                response = requests.get(urls3img)
+
+                                img = Image.open(BytesIO(response.content))
 
                                 font_base = './fonts/Roboto-Medium.ttf'
 

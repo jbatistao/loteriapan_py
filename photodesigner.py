@@ -1,5 +1,7 @@
 from PIL import Image,ImageDraw,ImageFont
 from datetime import *
+import requests
+from io import BytesIO
 
 tipo_sorteo = 'Miercolito'
 fecha_sort = '20220401'
@@ -11,7 +13,13 @@ letras = 'AAAA'
 serie = 0
 folio = 0
 
-img = Image.open("./source-images/temp_bot.jpg")
+urls3img = 'https://infoloteria.s3.amazonaws.com/imgtemp_bot.jpg'                             
+
+response = requests.get(urls3img)
+
+img = Image.open(BytesIO(response.content))
+
+# img = Image.open("./source-images/temp_bot.jpg")
 
 font_base = './fonts/Roboto-Medium.ttf'
 

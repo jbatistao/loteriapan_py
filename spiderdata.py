@@ -14,6 +14,7 @@ from datetime import *
 import requests
 import os
 import time
+from io import BytesIO
 
 import boto3
 
@@ -142,7 +143,13 @@ if (horario >= "13:45:00" and horario <= "14:45:00"):
                             if docs == []: 
                                 print(datetime.now(),' - No existe... debe guardarse')                             
 
-                                img = Image.open("./source-images/temp_bot.jpg")
+                                img = Image.open("./source-images/imgtemp_bot.jpg")
+
+                                urls3img = 'https://infoloteria.s3.amazonaws.com/imgtemp_bot.jpg'                             
+
+                                response = requests.get(urls3img)
+
+                                img = Image.open(BytesIO(response.content))
 
                                 font_base = './fonts/Roboto-Medium.ttf'
 
