@@ -143,7 +143,7 @@ if (horario >= "00:00:01" and horario <= "23:55:55"):
                             if docs == []: 
                                 print(datetime.now(),' - No existe... debe guardarse')                             
 
-                                img = Image.open("./source-images/imgtemp_bot.jpg")
+                                # img = Image.open("./source-images/imgtemp_bot.jpg")
 
                                 urls3img = 'https://infoloteria.s3.amazonaws.com/imgtemp_bot.jpg'                             
 
