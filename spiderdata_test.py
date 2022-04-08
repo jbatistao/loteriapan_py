@@ -146,34 +146,32 @@ if (horario >= "00: 00:01" and horario <= "23:59:00"):
 
                                 font_base = './fonts/Roboto-Medium.ttf'
 
-                                font_h1 = ImageFont.truetype(font_base,70)
+                                font_h1 = ImageFont.truetype(font_base,90)
                                 font_h2 = ImageFont.truetype(font_base,40)
                                 font_h3 = ImageFont.truetype(font_base,50)
 
-                                color_a = (255,255,255)
+                                color_a = (0,0,0)
                                 x = 0
                                 y = 45
                                 draw = ImageDraw.Draw(img)
-                                draw.text((460+x, 0+y), "Sorteo",fill=color_a,font=font_h3)
-                                draw.text((380+x, 60+y), tipo_sorteo,fill=color_a,font=font_h1)
-                                draw.text((350+x, 150+y), fecha_sorteo,fill=color_a,font=font_h2)
+                                draw.text((40+x, 240+y), "Sorteo "+tipo_sorteo,fill=color_a,font=font_h3)
+                                # draw.text((380+x, 60+y), tipo_sorteo,fill=color_a,font=font_h1)
+                                draw.text((40+x, 300+y), fecha_sorteo,fill=color_a,font=font_h2)
 
-                                draw.text((150+x, 280+y), "Primer Premio",fill=color_a,font=font_h2)
-                                draw.text((700+x, 265+y), primer_premio,fill=color_a,font=font_h1)
+                                draw.text((90+x, 465+y), primer_premio,fill=color_a,font=font_h1)
+                                draw.text((440+x, 465+y), segundo_premio,fill=color_a,font=font_h1)
+                                draw.text((780+x, 465+y), tercer_premio,fill=color_a,font=font_h1)
 
-                                draw.text((200+x, 400+y), "Letras",fill=color_a,font=font_h2)
-                                draw.text((490+x, 400+y), "Serie",fill=color_a,font=font_h2)
-                                draw.text((770+x, 400+y), "Folio",fill=color_a,font=font_h2)
+                                draw.text((80+x, 730+y), letras,fill=color_a,font=font_h1)
+                                if serie >= 10:
+                                    draw.text((485+x, 730+y), str(serie),fill=color_a,font=font_h1)
+                                else:
+                                    draw.text((520+x, 730+y), str(serie),fill=color_a,font=font_h1)
 
-                                draw.text((170+x, 450+y), letras,fill=color_a,font=font_h1)
-                                draw.text((500+x, 450+y), str(serie),fill=color_a,font=font_h1)
-                                draw.text((790+x, 450+y), str(folio),fill=color_a,font=font_h1)
-
-                                draw.text((150+x, 620+y), "Segundo Premio",fill=color_a,font=font_h2)
-                                draw.text((700+x, 600+y), segundo_premio,fill=color_a,font=font_h1)
-
-                                draw.text((150+x, 790+y), "Tercer Premio",fill=color_a,font=font_h2)
-                                draw.text((700+x, 770+y), tercer_premio,fill=color_a,font=font_h1)
+                                if folio >= 10:
+                                    draw.text((835+x, 730+y), str(folio),fill=color_a,font=font_h1)
+                                else:
+                                    draw.text((860+x, 730+y), str(folio),fill=color_a,font=font_h1)
 
                                 img_name = 'post'+fecha_sort+'.jpg'
                                 img_fullroute = 'saved-images/'+img_name
@@ -223,5 +221,5 @@ if (horario >= "00: 00:01" and horario <= "23:59:00"):
     
     print(datetime.now(),' - No hay más datos')
 
-# else:
-#     print(datetime.now(),' - Estamos fuera de horario')    
+else:
+    print(datetime.now(),' - Estamos fuera de horario')    
