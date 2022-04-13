@@ -122,7 +122,7 @@ if (horario >= "00:00:01" and horario <= "23:55:55"):
                             print(tipo_sorteo,fecha_sorteo,fecha_sorteo_cap,fecha_sort,primer_premio,letras,serie,folio,segundo_premio,tercer_premio)
                             
                             datasorteo = {
-                                'fecha_sorteo': fecha_sorteo,
+                                'fecha': fecha_sorteo,
                                 'fecha_sort': fecha_sort,
                                 'tipo_sorteo': tipo_sorteo,
                                 'primer_premio': primer_premio,
@@ -214,6 +214,21 @@ if (horario >= "00:00:01" and horario <= "23:55:55"):
                                 doc_ref = db.collection(u'sorteos').document()
                                 doc_ref.set(datasorteo)
                                 print(datetime.now(),' - Registro creado en Firebase')
+
+                                pload = {
+                                "fecha_sorteo": fecha_sorteo,
+                                "fecha_sort": fecha_sort,
+                                "tipo": tipo_sorteo,
+                                "primer_premio": primer_premio,
+                                "segundo_premio": segundo_premio,
+                                "tercer_premio": tercer_premio,
+                                "letras": letras,
+                                "serie": serie,
+                                "folio": folio
+                                }
+                                r = requests.post('https://notiloteria-api.herokuapp.com/api/sorteo/',json = pload)
+                                print(r.status_code)
+                                print(r.json())
                             
                             i = i+8
                             # print('i: ',i)

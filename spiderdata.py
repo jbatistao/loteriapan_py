@@ -122,7 +122,7 @@ if (horario >= "13:45:00" and horario <= "14:45:00"):
                             print(tipo_sorteo,fecha_sorteo,fecha_sorteo_cap,fecha_sort,primer_premio,letras,serie,folio,segundo_premio,tercer_premio)
                             
                             datasorteo = {
-                                'fecha_sorteo': fecha_sorteo,
+                                'fecha': fecha_sorteo,
                                 'fecha_sort': fecha_sort,
                                 'tipo_sorteo': tipo_sorteo,
                                 'primer_premio': primer_premio,
@@ -143,7 +143,7 @@ if (horario >= "13:45:00" and horario <= "14:45:00"):
                             if docs == []: 
                                 print(datetime.now(),' - No existe... debe guardarse')                             
 
-                                img = Image.open("./source-images/imgtemp_bot.jpg")
+                                # img = Image.open("./source-images/imgtemp_bot.jpg")
 
                                 urls3img = 'https://infoloteria.s3.amazonaws.com/imgtemp_bot.jpg'                             
 
@@ -214,6 +214,21 @@ if (horario >= "13:45:00" and horario <= "14:45:00"):
                                 doc_ref = db.collection(u'sorteos').document()
                                 doc_ref.set(datasorteo)
                                 print(datetime.now(),' - Registro creado en Firebase')
+
+                                pload = {
+                                "fecha_sorteo": fecha_sorteo,
+                                "fecha_sort": fecha_sort,
+                                "tipo": tipo_sorteo,
+                                "primer_premio": primer_premio,
+                                "segundo_premio": segundo_premio,
+                                "tercer_premio": tercer_premio,
+                                "letras": letras,
+                                "serie": serie,
+                                "folio": folio
+                                }
+                                r = requests.post('https://notiloteria-api.herokuapp.com/api/sorteo/',json = pload)
+                                print(r.status_code)
+                                print(r.json())
                             
                             i = i+8
                             # print('i: ',i)
