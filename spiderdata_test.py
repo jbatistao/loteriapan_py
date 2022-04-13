@@ -122,7 +122,7 @@ if (horario >= "00:00:01" and horario <= "23:55:55"):
                             print(tipo_sorteo,fecha_sorteo,fecha_sorteo_cap,fecha_sort,primer_premio,letras,serie,folio,segundo_premio,tercer_premio)
                             
                             datasorteo = {
-                                'fecha': fecha_sorteo,
+                                'fecha_sorteo': fecha_sorteo,
                                 'fecha_sort': fecha_sort,
                                 'tipo_sorteo': tipo_sorteo,
                                 'primer_premio': primer_premio,
