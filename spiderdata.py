@@ -1,27 +1,23 @@
 # Spider 
 
-import firebase_admin
 from firebase_admin import credentials,db
 from firebase_admin import firestore
-
 from bs4 import BeautifulSoup
-
 from PIL import Image,ImageDraw,ImageFont
-
-import facebook
-
 from datetime import *
+from io import BytesIO
+from dotenv import load_dotenv
 import requests
 import os
 import time
-from io import BytesIO
-
+import firebase_admin
+import facebook
 import boto3
 
-from dotenv import load_dotenv
-
+# Activa las variables de entorno del .env
 dotenvvals = load_dotenv()
 
+# AWS
 aws_access_key_id = os.getenv('AWS_ACCESS_KEY_ID')
 aws_secret_access_key = os.getenv('AWS_SECRET_ACCESS_KEY')
 region_name = os.getenv('REGION_NAME')
@@ -42,14 +38,25 @@ dataCredentials = {
   "client_x509_cert_url": os.getenv('CLIENT_X509_CERT_URL'),
 }
 
+# API Core
+key = os.getenv('API_KEY')
+url_target = os.getenv('URL_TARGET')
+
 # Facebook SDK
 token = os.getenv('FB_TOKEN')
 graph = facebook.GraphAPI(token)
+fb_object = os.getenv('FB_OBJECT')
+ig_object = os.getenv('IG_OBJECT')
+
+# Otras variables
+url_source = os.getenv('URL_SOURCE')
+url_s3 = os.getenv('URL_S3')
+
+print('Variables de entorno cargadas')
 
 # Configuración de Firebase
 cred = credentials.Certificate(dataCredentials)
 firebase_admin.initialize_app(cred)
-
 db = firestore.client()
 
 # Inicio del procesamiento
@@ -78,7 +85,7 @@ if (horario >= "13:45:00" and horario <= "14:45:00"):
         # print('ia: ',ia)
         im = 0
         for m in mes:
-            url = 'http://www.lnb.gob.pa/numerosjugados.php?tiposorteo=T&ano='+anos[ia]+'&meses='+mes[im]+'&Consultar=Buscar'
+            url = url_source+anos[ia]+'&meses='+mes[im]+'&Consultar=Buscar'
             r = requests.get(url)
             soup = BeautifulSoup(r.content, 'html.parser')
             data = soup.find_all('strong')
@@ -145,7 +152,7 @@ if (horario >= "13:45:00" and horario <= "14:45:00"):
 
                                 # img = Image.open("./source-images/imgtemp_bot.jpg")
 
-                                urls3img = 'https://infoloteria.s3.amazonaws.com/imgtemp_bot.jpg'                             
+                                urls3img = url_s3+'imgtemp_bot.jpg'                             
 
                                 response = requests.get(urls3img)
 
@@ -188,7 +195,7 @@ if (horario >= "13:45:00" and horario <= "14:45:00"):
 
                                 time.sleep(3)
                                 
-                                urls3 = 'https://infoloteria.s3.amazonaws.com/'+img_name
+                                urls3 = url_s3+img_name
 
                                 s3.Object('infoloteria',img_name).upload_file(img_fullroute)
                                 print(datetime.now(),' - Publicada en S3!')
@@ -196,13 +203,13 @@ if (horario >= "13:45:00" and horario <= "14:45:00"):
 
                                 msg_regular = 'En el soteo ' + tipo_sorteo + ' de ' + fecha_sorteo + ' los números ganadores fueron: ' + '\n' + 'Primer Premio: ' + primer_premio + '\n' + 'Letras: ' + letras + '\n' + 'Serie: ' + str(serie) + '\n' + 'Folio: ' + str(folio) + '\n' + 'Segundo Premio: ' + segundo_premio + '\n' + 'Tercer Premio: ' + tercer_premio
 
-                                fb_rx = graph.put_object('102607489042095','photos',url=urls3,caption=msg_regular)
+                                fb_rx = graph.put_object(fb_object,'photos',url=urls3,caption=msg_regular)
                                 print(datetime.now(),' - Publicada en FB!')
 
-                                fb_rx_a = graph.put_object('17841452380183145','media',image_url=urls3,caption=msg_regular)
+                                fb_rx_a = graph.put_object(ig_object,'media',image_url=urls3,caption=msg_regular)
                                 # print(fb_rx_a)
 
-                                fb_rx_b = graph.put_object('17841452380183145','media_publish',creation_id=fb_rx_a['id'])
+                                fb_rx_b = graph.put_object(ig_object,'media_publish',creation_id=fb_rx_a['id'])
                                 # print(fb_rx_b)
 
                                 print(datetime.now(),' - Publicada en IG!')
@@ -226,9 +233,13 @@ if (horario >= "13:45:00" and horario <= "14:45:00"):
                                 "serie": serie,
                                 "folio": folio
                                 }
-                                r = requests.post('https://notiloteria-api.herokuapp.com/api/sorteo/',json = pload)
+
+                                headers_content = { "Authorization" : key }
+                                
+                                r = requests.post(url_target,headers=headers_content,json = pload)
                                 print(r.status_code)
                                 print(r.json())
+                                print(datetime.now(),' - Registro creado en API Core')
                             
                             i = i+8
                             # print('i: ',i)
