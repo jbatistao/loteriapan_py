@@ -142,7 +142,7 @@ if (horario >= "13:45:00" and horario <= "14:45:00"):
                             }
                             
                             # Verifica los datos están completos
-                            if (tipo_sorteo != 'Gordito del Zodiaco' and len(tercer_premio) == 4) or (tipo_sorteo == 'Gordito del Zodiaco' and len(tercer_premio) == 2):
+                            if (tipo_sorteo == 'Miercolito' and len(tercer_premio) == 4) or (tipo_sorteo == 'Dominical' and len(tercer_premio) == 4) or (tipo_sorteo == 'Gordito del Zodiaco' and len(tercer_premio) == 2)  or (tipo_sorteo == 'Extraordinario' and len(tercer_premio) == 5):
                                 # Verifica si el número y tipo de sorteo existe 
                                 docs = db.collection(u'sorteos').where(u'fecha_sort', u'==', fecha_sort).get()
 
@@ -171,10 +171,15 @@ if (horario >= "13:45:00" and horario <= "14:45:00"):
                                 draw.text((40+x, 240+y), "Sorteo "+tipo_sorteo,fill=color_a,font=font_h3)
                                 # draw.text((380+x, 60+y), tipo_sorteo,fill=color_a,font=font_h1)
                                 draw.text((40+x, 300+y), fecha_sorteo,fill=color_a,font=font_h2)
-
-                                draw.text((90+x, 465+y), primer_premio,fill=color_a,font=font_h1)
-                                draw.text((440+x, 465+y), segundo_premio,fill=color_a,font=font_h1)
-                                draw.text((780+x, 465+y), tercer_premio,fill=color_a,font=font_h1)
+                                
+                                if (tipo_sorteo == 'Extraordinario'):
+                                    draw.text((70+x, 465+y), primer_premio,fill=color_a,font=font_h1)
+                                    draw.text((415+x, 465+y), segundo_premio,fill=color_a,font=font_h1)
+                                    draw.text((755+x, 465+y), tercer_premio,fill=color_a,font=font_h1)
+                                else:
+                                    draw.text((90+x, 465+y), primer_premio,fill=color_a,font=font_h1)
+                                    draw.text((440+x, 465+y), segundo_premio,fill=color_a,font=font_h1)
+                                    draw.text((780+x, 465+y), tercer_premio,fill=color_a,font=font_h1)
 
                                 draw.text((80+x, 730+y), letras,fill=color_a,font=font_h1)
                                 if serie >= 10:
