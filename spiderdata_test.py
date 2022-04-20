@@ -239,15 +239,15 @@ if (horario >= "00:00:01" and horario <= "23:59:59"):
                                 # "folio": folio
                                 # }
                                 pload = {
-                                "fecha_sorteo": "11 de Abril de 2022",
-                                "fecha_sort": "20220411",
-                                "tipo": "Dominical2",
-                                "primer_premio": "1111",
-                                "segundo_premio": "2222",
-                                "tercer_premio": "3333",
-                                "letras": "AAAA",
-                                "serie": 1,
-                                "folio": 2
+                                "fecha_sorteo": fecha_sorteo,
+                                "fecha_sort": fecha_sort,
+                                "tipo": tipo_sorteo,
+                                "primer_premio": primer_premio,
+                                "segundo_premio": segundo_premio,
+                                "tercer_premio": tercer_premio,
+                                "letras": letras,
+                                "serie": serie,
+                                "folio": folio
                                 }
                                 headers_content = { "Authorization" : key }
                                 
