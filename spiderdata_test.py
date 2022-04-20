@@ -145,7 +145,6 @@ if (horario >= "00:00:01" and horario <= "23:59:59"):
                             if (tipo_sorteo == 'Miercolito' and len(tercer_premio) == 4) or (tipo_sorteo == 'Dominical' and len(tercer_premio) == 4) or (tipo_sorteo == 'Gordito del Zodiaco' and len(tercer_premio) == 2)  or (tipo_sorteo == 'Extraordinario' and len(tercer_premio) == 5):
                                 # Verifica si el número y tipo de sorteo existe 
                                 docs = db.collection(u'sorteos').where(u'fecha_sort', u'==', fecha_sort).get()
-                                print(docs)
 
                             # Verifica si el número y tipo de sorteo existe
                             if docs == []: 
@@ -242,7 +241,7 @@ if (horario >= "00:00:01" and horario <= "23:59:59"):
 
                                 headers_content = { "Authorization" : key }
                                 
-                                r = requests.post('https://notiloteria-api.herokuapp.com/api/sorteo/',json = pload)
+                                r = requests.post(url_target,headers=headers_content,json = pload)
                                 print(r.status_code)
                                 print(r.json())
                                 print(datetime.now(),' - Registro creado en API Core')
