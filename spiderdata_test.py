@@ -227,32 +227,21 @@ if (horario >= "00:00:01" and horario <= "23:59:59"):
                                 doc_ref.set(datasorteo)
                                 print(datetime.now(),' - Registro creado en Firebase')
 
-                                # pload = {
-                                # "fecha_sorteo": fecha_sorteo,
-                                # "fecha_sort": fecha_sort,
-                                # "tipo": tipo_sorteo,
-                                # "primer_premio": primer_premio,
-                                # "segundo_premio": segundo_premio,
-                                # "tercer_premio": tercer_premio,
-                                # "letras": letras,
-                                # "serie": serie,
-                                # "folio": folio
-                                # }
                                 pload = {
-                                "fecha_sorteo": fecha_sorteo,
-                                "fecha_sort": fecha_sort,
-                                "tipo": tipo_sorteo,
-                                "primer_premio": primer_premio,
-                                "segundo_premio": segundo_premio,
-                                "tercer_premio": tercer_premio,
-                                "letras": letras,
-                                "serie": serie,
-                                "folio": folio
+                                "fecha_sorteo": fecha_sorteo, # '18 de Abril de 2022'
+                                "fecha_sort": fecha_sort, # '20220418'
+                                "tipo": tipo_sorteo, # 'Extraordinario'
+                                "primer_premio": primer_premio, # '24004'
+                                "segundo_premio": segundo_premio, # '41828'
+                                "tercer_premio": tercer_premio, # '16739'
+                                "letras": letras, # 'AABC'
+                                "serie": serie, # 1
+                                "folio": folio # 4
                                 }
                                 headers_content = { "Authorization" : key }
                                 
-                                # r = requests.post(url_target,headers=headers_content,json = pload)
-                                r = requests.post('https://notiloteria-api.herokuapp.com/api/sorteo/',json = pload)
+                                r = requests.post(url_target,headers=headers_content,json = pload)
+                                # r = requests.post('https://notiloteria-api.herokuapp.com/api/sorteo/',json = pload)
                                 print(r.status_code)
                                 print(r.json())
                                 print(datetime.now(),' - Registro creado en API Core')

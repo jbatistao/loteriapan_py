@@ -241,7 +241,8 @@ if (horario >= "13:45:00" and horario <= "14:45:00"):
 
                                 headers_content = { "Authorization" : key }
                                 
-                                r = requests.post('https://notiloteria-api.herokuapp.com/api/sorteo/',json = pload)
+                                r = requests.post(url_target,headers=headers_content,json = pload)
+                                # r = requests.post('https://notiloteria-api.herokuapp.com/api/sorteo/',json = pload)
                                 print(r.status_code)
                                 print(r.json())
                                 print(datetime.now(),' - Registro creado en API Core')
